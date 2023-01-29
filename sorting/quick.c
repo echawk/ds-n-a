@@ -3,7 +3,8 @@
 int partition(Arr_T A, int low, int high) {
   int pivot = A.arr[high];
   int i = low - 1;
-  for (int j = low; j <= high - 1; j++) {
+  int j;
+  for (j = low; j <= high - 1; j++) {
     if (A.arr[j] < pivot) {
       i++;
       swap(i, j, A);
