@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for f in *.c; do
+    cc -o "${f%%.c}" "$f"
+done
