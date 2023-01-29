@@ -26,8 +26,9 @@ void print_Arr(Arr_T A) {
 }
 
 void swap(int ind1, int ind2, Arr_T A) {
-  int t;
-  t = A.arr[ind1];
-  A.arr[ind1] = A.arr[ind2];
-  A.arr[ind2] = t;
+  if (A.arr[ind1] != A.arr[ind2]) {
+    A.arr[ind1] = A.arr[ind1] ^ A.arr[ind2];
+    A.arr[ind2] = A.arr[ind1] ^ A.arr[ind2];
+    A.arr[ind1] = A.arr[ind1] ^ A.arr[ind2];
+  }
 }
