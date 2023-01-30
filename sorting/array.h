@@ -7,7 +7,7 @@ typedef struct Arr {
 } Arr_T;
 
 Arr_T make_Arr(int size) {
-  return (Arr_T){.size = size, .arr = malloc(sizeof(int) * size)};
+  return (Arr_T){.size = size, .arr = calloc(size, sizeof(int))};
 }
 
 void populate_Arr(Arr_T A) {
@@ -16,6 +16,7 @@ void populate_Arr(Arr_T A) {
     A.arr[i] = rand() % A.size;
   }
 }
+
 void print_Arr(Arr_T A) {
   int i = 0;
   printf("[");
