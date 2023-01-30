@@ -1,5 +1,8 @@
 #!/bin/sh
 
 for f in *.c; do
+	clang-format --style=llvm "$f" > "1$f"
+	rm "$f"
+	mv "1$f" "$f"
     "${CC:-cc}" -std=c99 -Wall -pedantic -o "${f%%.c}" "$f"
 done
