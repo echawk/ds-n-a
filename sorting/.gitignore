@@ -5,4 +5,5 @@ radix
 comb
 bucket
 shell
-
+*.o
+vis-*
