@@ -25,18 +25,23 @@ void gnome_sort(Arr_T arr) {
 void sort(Arr_T arr) { gnome_sort(arr); }
 
 #ifndef ASLIB
-int main(void) {
-  Arr_T test_arr = make_Arr(100);
-  populate_Arr(test_arr);
-
-  printf("Array before it is sorted: ");
-  print_Arr(test_arr);
-
-  gnome_sort(test_arr);
-
-  printf("Array after it is gnome sorted: ");
-  print_Arr(test_arr);
-
-  return EXIT_SUCCESS;
+int main(int argc, char *argv[]) {
+  int arr_size;
+  if (argc > 1) {
+    if (sscanf(argv[1], "%i", &arr_size) != 1) {
+      fprintf(stderr, "[ERR] - Not an integer!");
+      return 1;
+    }
+  } else {
+    arr_size = 100;
+  }
+  Arr_T M = make_Arr(arr_size);
+  populate_Arr(M);
+  printf("Array before sorting: \n");
+  print_Arr(M);
+  combSort(M);
+  printf("Array after sorting: \n");
+  print_Arr(M);
+  return 0;
 }
 #endif
