@@ -1,5 +1,5 @@
 #define VISUALIZE
-#define _BSD_SOURCE // gets rid of usleep() warnings
+#define _DEFAULT_SOURCE // gets rid of usleep() warnings
 #include "array.h"
 
 #include <SDL2/SDL.h>
