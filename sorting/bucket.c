@@ -3,32 +3,32 @@
 
 #include "array.h"
 
-//function to find the max value in the array
-int getMax(Arr_T A){
-    int max = A.arr[0];
-    for (int i = 0; i < A.size; i++){
-        if (A.arr[i] > max){
-            max = A.arr[i];
-        }
+// function to find the max value in the array
+int getMax(Arr_T A) {
+  int max = A.arr[0];
+  for (int i = 0; i < A.size; i++) {
+    if (A.arr[i] > max) {
+      max = A.arr[i];
     }
-    return max;
+  }
+  return max;
 }
 
-void bucketSort(Arr_T A){
-    int max = getMax(A); //get max of array
-    int bucket[max]; //create max number of buckets
-    for(int i = 0; i <= max; i++){
-        bucket[i] = 0; //fill list with 0's
+void bucketSort(Arr_T A) {
+  int max = getMax(A); // get max of array
+  int bucket[max];     // create max number of buckets
+  for (int i = 0; i <= max; i++) {
+    bucket[i] = 0; // fill list with 0's
+  }
+  for (int j = 0; j < A.size; j++) {
+    bucket[A.arr[j]]++;
+  }
+  for (int k = 0, m = 0; k <= max; k++) {
+    while (bucket[k] > 0) {
+      A.arr[m++] = k;
+      bucket[k]--;
     }
-    for(int j = 0; j < A.size; j++){
-        bucket[A.arr[j]]++;
-    }
-    for(int k = 0, m = 0; k <= max; k++){
-        while (bucket[k] > 0){
-            A.arr[m++] = k;
-            bucket[k]--;
-        }
-    }
+  }
 }
 
 int main(int argc, char *argv[]) {
