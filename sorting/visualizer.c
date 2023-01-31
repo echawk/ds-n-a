@@ -47,6 +47,8 @@ Rect_T make_Rect(int x, int y, int height, int width, rgb_T color) {
   return (Rect_T){.x = x, .height = height, .width = width, .color = color};
 }
 
+// FIXME: When drawing, there is a big black bar along the right hand side
+// -- need to figure out how to get it to take up the entire window.
 // Draws, but does not present a rectangle 'r'
 void draw_Rect(Rect_T r) {
   int i, j;
@@ -109,7 +111,6 @@ void swap(int ind1, int ind2, Arr_T A) {
   R.arr[ind2].color = red;
   SDL_RenderClear(renderer);
   show_RArr(R);
-  usleep(SSECONDS(.1));
 }
 
 int init_sdl() {
@@ -135,9 +136,7 @@ int init_sdl() {
 }
 
 void main_sdl() {
-  SDL_Event e;
-  bool should_exit = false;
-  Arr_T A = make_Arr(30);
+  Arr_T A = make_Arr(300);
   sorted_populate_Arr(A);
 
   // Some Window math...
@@ -150,21 +149,13 @@ void main_sdl() {
   show_RArr(R);
   shuffle_Arr(A);
   sort(A); // This function is provided by one of the algorithm files.
+  usleep(SSECONDS(.2));
 
   // And we're done.
   SDL_RenderClear(renderer);
   populate_RArr(R, A, bar_w, bar_scale, green);
   show_RArr(R);
-
-  while (!should_exit) {
-    while (SDL_PollEvent(&e)) {
-      switch (e.type) {
-      case SDL_QUIT:
-        should_exit = true;
-        break;
-      }
-    }
-  }
+  usleep(SSECONDS(2));
 }
 
 void exit_sdl() {
