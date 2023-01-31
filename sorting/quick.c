@@ -24,6 +24,9 @@ void quick_sort_driver(Arr_T A, int low, int high) {
 
 void quick_sort(Arr_T A) { quick_sort_driver(A, 0, A.size - 1); }
 
+void sort(Arr_T A) { quick_sort(A); }
+
+#ifndef ASLIB
 int main(int argc, char *argv[]) {
   int arr_size;
   if (argc > 1) {
@@ -41,3 +44,4 @@ int main(int argc, char *argv[]) {
   print_Arr(M);
   return 0;
 }
+#endif
