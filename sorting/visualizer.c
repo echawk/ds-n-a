@@ -152,6 +152,7 @@ void main_sdl() {
   sort(A); // This function is provided by one of the algorithm files.
 
   // And we're done.
+  SDL_RenderClear(renderer);
   populate_RArr(R, A, bar_w, bar_scale, green);
   show_RArr(R);
 
