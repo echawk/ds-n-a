@@ -12,6 +12,9 @@ void insertion_sort(Arr_T A) {
   }
 }
 
+void sort(Arr_T A) { insertion_sort(A); }
+
+#ifndef ASLIB
 int main(int argc, char *argv[]) {
   int arr_size;
   if (argc > 1) {
@@ -29,3 +32,4 @@ int main(int argc, char *argv[]) {
   print_Arr(M);
   return 0;
 }
+#endif
