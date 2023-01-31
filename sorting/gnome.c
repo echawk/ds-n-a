@@ -22,8 +22,11 @@ void gnome_sort(Arr_T arr) {
   return;
 }
 
+void sort(Arr_T arr) { gnome_sort(arr); }
+
+#ifndef ASLIB
 int main(void) {
-  Arr_T test_arr = make_Arr(10);
+  Arr_T test_arr = make_Arr(100);
   populate_Arr(test_arr);
 
   printf("Array before it is sorted: ");
@@ -36,3 +39,4 @@ int main(void) {
 
   return EXIT_SUCCESS;
 }
+#endif
