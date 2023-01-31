@@ -15,3 +15,4 @@ void print_Arr(Arr_T A);
 void swap(int ind1, int ind2, Arr_T A);
 void sorted_populate_Arr(Arr_T A);
 void shuffle_Arr(Arr_T A);
+void sort(Arr_T A);
