@@ -1,9 +1,15 @@
 #!/bin/sh
 
-for f in *.c; do
-    if ! clang-format --style=llvm "$f" | diff - "$f"; then
-        echo "Formatting $f"
-        clang-format --style=llvm -i "$f"
+CFLAGS="-std=c99 -Wall -pedantic"
+
+"${CC:-cc}" $CFLAGS -c array.c -o array.o
+"${CC:-cc}" $CFLAGS -DVISUALIZE -c array.c -o array-viz.o
+for alg in bucket.c comb.c gnome.c insertion.c quick.c; do
+    if ! clang-format --style=llvm "$alg" | diff - "$alg"; then
+        echo "Formatting $alg"
+        clang-format --style=llvm -i "$alg"
     fi
-    "${CC:-cc}" -std=c99 -Wall -pedantic -o "${f%%.c}" "$f"
+    "${CC:-cc}" $CFLAGS -DASLIB -c "${alg%%.c}.o" "$alg"
+    "${CC:-cc}" $CFLAGS -o "${alg%%.c}" array.o "$alg"
+    "${CC:-cc}" $CFLAGS -lSDL2 -o "vis-${alg%%.c}" "${alg%%.c}.o" array-viz.o visualizer.c
 done
