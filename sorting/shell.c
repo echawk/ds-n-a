@@ -8,18 +8,19 @@ void shell_sort(Arr_T A) {
     int x = gap;
 
     while (x < A.size) {
-      int y = x-gap;
+      int y = x - gap;
 
       while (y >= 0) {
-        if (A.arr[y+gap] > A.arr[y]) {
+        if (A.arr[y + gap] > A.arr[y]) {
           break;
         } else {
-          swap(y, y+gap, A);
+          swap(y, y + gap, A);
         }
+        y = y - gap;
       }
-      x=x+1;
+      x = x + 1;
     }
-    gap = gap/2;
+    gap = gap / 2;
   }
 }
 
@@ -33,10 +34,10 @@ int main(int argc, char *argv[]) {
   } else {
     arr_size = 100;
   }
-  Arr_T M = make_Arr(arr_size); //Create Array
-  populate_Arr(M); //Populate Array
-  print_Arr(M); //Print initial array
-  shell_sort(M); //Sorts array with my Shell Short method
-  print_Arr(M); //Print end array
+  Arr_T M = make_Arr(arr_size); // Create Array
+  populate_Arr(M);              // Populate Array
+  print_Arr(M);                 // Print initial array
+  shell_sort(M);                // Sorts array with my Shell Short method
+  print_Arr(M);                 // Print end array
   return 0;
 }
