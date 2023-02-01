@@ -4,6 +4,9 @@
 
 const double gapCoeff = 10.0 / 13.0; // value to multiply to get gap
 
+/*Worst case performace: O(n^2)
+  Average case performance: Ω(n^2/2^p) where p is number of increments)
+  Best case performance: θ(nlogn)*/
 void combSort(Arr_T A) {
   int i, j, gap = A.size; // inital gap is size of array
   bool swapped = true;

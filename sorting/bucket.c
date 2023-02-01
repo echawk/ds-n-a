@@ -13,6 +13,8 @@ int getMax(Arr_T A) {
   return max;
 }
 
+/*Worst case performace: O(n^2)
+  Average case performance: O(n + n^2/k + k where k is the number of buckets)*/
 void bucketSort(Arr_T A) {
   int max = getMax(A); // get max of array
   int bucket[max];     // create max number of buckets
