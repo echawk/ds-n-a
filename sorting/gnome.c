@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
   populate_Arr(M);
   printf("Array before sorting: \n");
   print_Arr(M);
-  combSort(M);
+  sort(M);
   printf("Array after sorting: \n");
   print_Arr(M);
   return 0;
