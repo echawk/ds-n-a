@@ -2,21 +2,22 @@
 #include <stdlib.h>
 
 
-struct Node{
+typedef struct Node{
     int data;
     struct Node *next;
-};
+}*node;
 
+//typedef struct Node* node;
 
-void printList(struct Node* n){
+void printList(node n){
     while (n != NULL){
         printf("%d ", n->data);
         n = n->next;
     }
 }
 
-int listSize(struct Node* n){
-    struct Node* curr;
+int listSize(node n){
+    node curr;
     int count = 0;
     for(curr = n; curr != NULL; curr = curr->next){
         count++;
@@ -26,66 +27,63 @@ int listSize(struct Node* n){
 
 /*function to create a node with data/link
  * and giving it a space in memory*/
-struct Node* createNode(int d, struct Node *n){
-    struct Node* newNode;
-    newNode = (struct Node*)malloc(sizeof(struct Node));
+node createNode(int d, node n){
+    node newNode;
+    newNode = (node)malloc(sizeof(node));
     newNode->data = d;
     newNode->next = n;
     return newNode;
 }
 
-struct Node* findNode(int d, struct Node *n){
-    struct Node* curr = n;
-    if (n == NULL){
-        return NULL;
-    }
-    while(curr->data != d){
-        if(curr->next == NULL){
-            return NULL;
-        }else{
-            curr = curr->next;
+node findNode(int d, node n){
+    node curr = n;
+    if (n != NULL){
+        while(curr->data != d){
+            if(curr->next != NULL){
+                curr = curr->next;
+            }
         }
-    }
-    return curr;
-}
-
-
-struct Node* deleteNode(int d, struct Node* n){
-    struct Node* curr = n;
-    struct Node* prev = NULL;
-    if(n == NULL){
-        return NULL;
-    }
-    while(curr->data != d){
-        if(curr->next == NULL){
-            return NULL;
-        }else{
-            prev = curr;
-            curr = curr->next;
-        }
-    }
-    if(curr == n){
-        n = n->next;
     }else{
-        prev->next = curr->next;
+        printf("This node does not exist!\n");
     }
     return curr;
 }
 
 
+void deleteNode(int d, node n){
+    node curr = n;
+    node prev = NULL;
+    if(n != NULL){
+        while(curr->data != d){
+            if(curr->next != NULL){
+                prev = curr;
+                curr = curr->next;
+            }
+        }
+        if(curr == n){
+            n = n->next;
+        }else{
+            prev->next = curr->next;
+        }
+    }else{
+        printf("The list is empty!\n");
+    }
+}
+
+/*
 int main(){
-    struct Node* sixth = createNode(6, NULL);
-    struct Node* fifth = createNode(5, sixth);
-    struct Node* fourth = createNode(4, fifth);
-    struct Node* third = createNode(3, fourth);
-    struct Node* second = createNode(2, third);
-    struct Node* head = createNode(1, second);
+    node sixth = createNode(6, NULL);
+    node fifth = createNode(5, sixth);
+    node fourth = createNode(4, fifth);
+    node third = createNode(3, fourth);
+    node second = createNode(2, third);
+    node head = createNode(1, second);
     printf("Original list: ");
     printList(head);
-    printf("\tList size: %d", listSize(head));
-    deleteNode(2, head);
+    printf("\n");
+    //printf("\tList size: %d", listSize(&head));
     printf("\nNew list: ");
     printList(head);
     printf("\tList size: %d", listSize(head));
     return 0;
-}
+}*/
