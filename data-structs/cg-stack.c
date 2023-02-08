@@ -2,54 +2,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-node top;
+node* top;
 
 void init() { top = NULL; }
-
-void push(int d) {
-  node temp = createNode(d, top);
-  top = temp;
-}
-
-int pop() {
-  int d;
-  node temp;
-  temp = top;
-  d = temp->data;
-  top = temp->next;
-  free(temp);
-  return d;
-}
-
-int peek() {
-  int d;
-  node temp;
-  temp = top;
-  d = top->data;
-  return d;
-}
-
-int getTop() { return top->data; }
+void push(char* s) { top = createNode(s, top); }
+void pop() { deleteNode(top->data, &top); }
+char* getTop() { return top->data; }
 int isEmpty() { return top == NULL; }
 
-void printStack(node h) {
-  if (h == NULL) {
-    printf("The stack is empty!\n");
-  } else {
-    printf("%d\n", h->data);
-    printStack(h->next);
-  }
+char* peek() {
+  char* s = top->data;
+  return s;
 }
 
 int main() {
   init();
-  for (int i = 0; i < 25; i++) {
-    push(rand() % 101);
-  }
+  push("Windows");
+  push("MacOS");
+  push("Ubuntu");
+  push("Debian");
+  push("Mint");
+  push("Fedora");
+  push("Arch");
+  push("Manjaro");
   printf("Here is the stack:\n");
   printList(top);
   printf("\n");
-  for (int i = 0; i < 2; i++) {
+  printf("Here is the value peeked at: %s\n", peek());
+  for (int i = 0; i < 3; i++) {
     pop();
   }
   printf("Here is the new stack:\n");

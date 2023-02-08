@@ -3,58 +3,56 @@
 #include <stdlib.h>
 
 typedef struct Queue {
-  node front, rear;
-} *queue;
+  node *front, *rear;
+} queue;
 
-node newNode(int d) {
-  node newNode = (node)malloc(sizeof(node));
-  newNode->data = d;
-  newNode->next = NULL;
-  return newNode;
-}
-
-queue createQueue() {
-  queue q = (queue)malloc(sizeof(queue));
+queue *createQueue() {
+  queue *q = (queue *)malloc(sizeof(queue));
   q->front = q->rear = NULL;
   return q;
 }
 
-void queueAdd(queue q, int d) {
-  node link = newNode(d);
+void queueAdd(queue *q, char* s) {
+  node *link = createNode(s, NULL);
   if (q->front == NULL) {
     q->front = q->rear = link;
     return;
   }
-
   q->rear->next = link;
   q->rear = link;
 }
 
-void queueRemove(queue q) {
+void queueRemove(queue *q) {
   if (q->front == NULL) {
     return;
   }
-  node link = q->front;
+  node *link = q->front;
   q->front = q->front->next;
   if (q->front == NULL) {
     q->rear = NULL;
   }
-  free(link);
 }
 
 int main() {
-  queue q = createQueue();
-  for (int i = 0; i < 25; i++) {
-    queueAdd(q, rand() % 101);
-  }
+  queue *q = createQueue();
+  queueAdd(q, "Windows");
+  queueAdd(q, "MacOS");
+  queueAdd(q, "Ubuntu");
+  queueAdd(q, "Debian");
+  queueAdd(q, "Mint");
+  queueAdd(q, "Fedora");
+  queueAdd(q, "Arch");
+  queueAdd(q, "Manjaro");
   printf("Here is the queue:\n");
   printList(q->front);
   printf("\n");
-  for (int i = 0; i < 5; i++) {
+  printf("\tList size: %d\n", listSize(q->front));
+  for (int i = 0; i < 3; i++) {
     queueRemove(q);
   }
   printf("Here is the new queue:\n");
   printList(q->front);
   printf("\n");
+  printf("\tList size: %d\n", listSize(q->front));
   return 0;
 }
