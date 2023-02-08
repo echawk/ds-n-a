@@ -12,8 +12,8 @@ queue *createQueue() {
   return q;
 }
 
-void queueAdd(queue *q, int d) {
-  node *link = createNode(d, NULL);
+void queueAdd(queue *q, char* s) {
+  node *link = createNode(s, NULL);
   if (q->front == NULL) {
     q->front = q->rear = link;
     return;
@@ -35,17 +35,24 @@ void queueRemove(queue *q) {
 
 int main() {
   queue *q = createQueue();
-  for (int i = 0; i < 25; i++) {
-    queueAdd(q, rand() % 101);
-  }
+  queueAdd(q, "Windows");
+  queueAdd(q, "MacOS");
+  queueAdd(q, "Ubuntu");
+  queueAdd(q, "Debian");
+  queueAdd(q, "Mint");
+  queueAdd(q, "Fedora");
+  queueAdd(q, "Arch");
+  queueAdd(q, "Manjaro");
   printf("Here is the queue:\n");
   printList(q->front);
   printf("\n");
-  for (int i = 0; i < 5; i++) {
+  printf("\tList size: %d\n", listSize(q->front));
+  for (int i = 0; i < 3; i++) {
     queueRemove(q);
   }
   printf("Here is the new queue:\n");
   printList(q->front);
   printf("\n");
+  printf("\tList size: %d\n", listSize(q->front));
   return 0;
 }

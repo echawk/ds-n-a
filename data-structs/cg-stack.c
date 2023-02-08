@@ -5,27 +5,31 @@
 node* top;
 
 void init() { top = NULL; }
-void push(int d) { top = createNode(d, top); }
+void push(char* s) { top = createNode(s, top); }
 void pop() { deleteNode(top->data, &top); }
-int getTop() { return top->data; }
+char* getTop() { return top->data; }
 int isEmpty() { return top == NULL; }
 
-int peek() {
-  int d;
-  d = top->data;
-  return d;
+char* peek() {
+  char* s = top->data;
+  return s;
 }
 
 int main() {
   init();
-  for (int i = 0; i < 25; i++) {
-    push(rand() % 101);
-  }
+  push("Windows");
+  push("MacOS");
+  push("Ubuntu");
+  push("Debian");
+  push("Mint");
+  push("Fedora");
+  push("Arch");
+  push("Manjaro");
   printf("Here is the stack:\n");
   printList(top);
   printf("\n");
-  printf("Here is the number peeked at: %d\n", peek());
-  for (int i = 0; i < 5; i++) {
+  printf("Here is the value peeked at: %s\n", peek());
+  for (int i = 0; i < 3; i++) {
     pop();
   }
   printf("Here is the new stack:\n");
