@@ -6,7 +6,7 @@
 
 #define DEBUG_STATEMENTS 1
 
-node_t* node_init(int _data, char* _next){
+node_t* node_init(int _data, node_t* _next){
 	node_t* ret = (node_t*)calloc(1, sizeof(node_t));
 
 	ret->data = _data; 
@@ -33,30 +33,30 @@ node_t* node_search(node_t** head_ref, int data, int instance){
 			ret = ptr;
 			instances_passed++;
 		}
-		ptr = (node_t*)ptr->next;
+		ptr = ptr->next;
 	}
 
 	return ret;	//this will return the last instance or NULL which is valid
 }
 // returns 
-bool node_delete(node_t** head_ref, char* key){
+bool node_delete(node_t** head_ref, node_t* key){
 	node_t* ptr = *head_ref;
 	node_t* last_node = NULL;
 
 	while(ptr != NULL){
-		if(ptr == (node_t*)key){
+		if(ptr == key){
 			if(last_node != NULL){
 				last_node->next = ptr->next;
 				ptr->next = NULL;
 				free(ptr);	//free the node we're no longer using
 			}
 			else{
-				*head_ref = (node_t*)ptr->next;
+				*head_ref = ptr->next;
 			}
 			return true;
 		}
 		last_node = ptr;
-		ptr = (node_t*)ptr->next;
+		ptr = ptr->next;
 	}
 
 	return false;
@@ -75,12 +75,12 @@ bool node_delete_at_place(node_t** head_ref, int index){
 				free(ptr);	//free the node we're no longer using
 			}
 			else{
-				*head_ref = (node_t*)ptr->next;
+				*head_ref = ptr->next;
 			}
 			return true;
 		}
 		last_node = ptr;
-		ptr = (node_t*)ptr->next;
+		ptr = ptr->next;
 		current_index++;
 	}
 
@@ -88,7 +88,7 @@ bool node_delete_at_place(node_t** head_ref, int index){
 }
 
 void node_add_to_front(node_t** head_ref, int new_data){
-	node_t* new_node = node_init(new_data, (char*)*head_ref);
+	node_t* new_node = node_init(new_data, *head_ref);
 	*head_ref = new_node;
 
 	return;
@@ -99,10 +99,10 @@ void node_add_to_end(node_t** head_ref, int new_data){
 	node_t* ptr = *head_ref;
 
 	while(ptr->next != NULL){
-		ptr = (node_t*)ptr->next;
+		ptr = ptr->next;
 	}
 
-	ptr->next = (char*)new_node;
+	ptr->next = new_node;
 
 	return;
 }
@@ -116,7 +116,7 @@ int node_get_at_end(node_t** head_ref){
 	node_t* ptr = *head_ref;
 
 	while(ptr->next != NULL)
-		ptr = (node_t*)ptr->next;
+		ptr = ptr->next;
 
 	return ptr->data;
 }
@@ -126,7 +126,7 @@ void node_print(node_t* head){
 	
 	while(ptr != NULL){
 		printf("%d ", ptr->data);
-		ptr = (node_t*)ptr->next;
+		ptr = ptr->next;
 	}
 	printf("\n");
 

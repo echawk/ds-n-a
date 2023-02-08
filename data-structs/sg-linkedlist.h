@@ -5,14 +5,14 @@
 
 typedef struct node_s{
 	int data;
-	char* next;
+	struct node_s* next;
 } node_t;
 
-node_t* node_init(int _data, char* _next);
+node_t* node_init(int _data, node_t* _next);
 
 node_t* node_search(node_t** head_ref, int data, int instance);
 
-bool node_delete(node_t** head_ref, char* key);
+bool node_delete(node_t** head_ref, node_t* key);
 
 bool node_delete_at_place(node_t** head_ref, int index);
 
