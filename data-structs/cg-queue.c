@@ -3,47 +3,38 @@
 #include <stdlib.h>
 
 typedef struct Queue {
-  node front, rear;
-} *queue;
+  node *front, *rear;
+} queue;
 
-node newNode(int d) {
-  node newNode = (node)malloc(sizeof(node));
-  newNode->data = d;
-  newNode->next = NULL;
-  return newNode;
-}
-
-queue createQueue() {
-  queue q = (queue)malloc(sizeof(queue));
+queue *createQueue() {
+  queue *q = (queue *)malloc(sizeof(queue));
   q->front = q->rear = NULL;
   return q;
 }
 
-void queueAdd(queue q, int d) {
-  node link = newNode(d);
+void queueAdd(queue *q, int d) {
+  node *link = createNode(d, NULL);
   if (q->front == NULL) {
     q->front = q->rear = link;
     return;
   }
-
   q->rear->next = link;
   q->rear = link;
 }
 
-void queueRemove(queue q) {
+void queueRemove(queue *q) {
   if (q->front == NULL) {
     return;
   }
-  node link = q->front;
+  node *link = q->front;
   q->front = q->front->next;
   if (q->front == NULL) {
     q->rear = NULL;
   }
-  free(link);
 }
 
 int main() {
-  queue q = createQueue();
+  queue *q = createQueue();
   for (int i = 0; i < 25; i++) {
     queueAdd(q, rand() % 101);
   }
