@@ -2,25 +2,24 @@
 
 from abc import ABC, abstractmethod
 
+
 class Node:
     def __init__(self, data, link):
         self.data = data
         self.link = link
 
+
 class LinkedList(ABC):
     def __init__(self, head_data):
         self.head = Node(head_data, None)
-    
 
     @abstractmethod
     def put(self, data):
         pass
 
-
     @abstractmethod
     def pop(self):
         pass
-
 
     def length(self) -> int:
         current_node = self.head
@@ -31,7 +30,6 @@ class LinkedList(ABC):
             current_node = current_node.link
 
         return n
-
 
     def contains(self, data) -> bool:
         current_node = self.head
@@ -66,7 +64,7 @@ class Queue(LinkedList):
 
         while current_node.link.link is not None:
             current_node = current_node.link
-        
+
         data = current_node.link.data
         current_node.link = None
 
