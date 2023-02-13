@@ -1,7 +1,8 @@
-'''Author: Christian Garcia
-Contents: Hash Table'''
+"""Author: Christian Garcia
+Contents: Hash Table"""
 
 import random
+
 
 class HashNode:
     def __init__(self, key, data):
@@ -11,7 +12,6 @@ class HashNode:
 
 
 class HashTable:
-
     hash_array: HashNode
     capacity: int
     size: int
@@ -22,7 +22,7 @@ class HashTable:
         self.hash_array = [None] * self.capacity
 
     def isEmpty(self):
-        return (self.size() == 0)
+        return self.size() == 0
 
     def hashCode(self, key):
         return key % self.capacity
@@ -33,7 +33,7 @@ class HashTable:
 
     def insert(self, key, data):
         self.size += 1
-        i = self.hashCode(key)        
+        i = self.hashCode(key)
         if self.hash_array[i] == None:
             self.hash_array[i] = HashNode(key, data)
         else:
@@ -67,11 +67,18 @@ class HashTable:
         for i in range(self.capacity):
             if self.hash_array[i] == None:
                 print("key:   | array[ ]:  ")
-            else:    
-                print("key: " + str(self.hash_array[i].key) + " | array[" + str(i) +"]: " + str(self.hash_array[i].data))
+            else:
+                print(
+                    "key: "
+                    + str(self.hash_array[i].key)
+                    + " | array["
+                    + str(i)
+                    + "]: "
+                    + str(self.hash_array[i].data)
+                )
 
 
-'''Main'''
+"""Main"""
 hash_size = 0
 hash_table = HashTable()
 for i in range(hash_table.capacity):
@@ -82,4 +89,4 @@ hash_table.printTable()
 hash_table.remove(4)
 print("\nThe size of the hash table is: " + str(hash_table.size))
 print("\nHere is the modified table: ")
-hash_table.printTable()                
+hash_table.printTable()

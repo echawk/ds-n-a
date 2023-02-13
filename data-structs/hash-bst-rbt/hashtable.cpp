@@ -7,38 +7,35 @@ class HashTable {
   list<int> *table;
 
 public:
-    HashTable(int c);
-    void insert(int k, int d);
-    void deleteNode(int k);
-    void displayTable();
+  HashTable(int c);
+  void insert(int k, int d);
+  void deleteNode(int k);
+  void displayTable();
 
-    int hashCode(int k) {
-        return k % capacity;
-    }
+  int hashCode(int k) { return k % capacity; }
 
-    int checkNum(int n) {
+  int checkNum(int n) {
     if (n == 0 || n == 1) {
-        return 0;
+      return 0;
     }
     for (int i = 2; i < n / 2; i++) {
-        if (n % i == 0) {
+      if (n % i == 0) {
         return 0;
-        }
+      }
     }
     return 1;
-    }
+  }
 
-    int getNum(int n) {
-        if (n % 2 == 0) {
-            n++;
-        }
-        while (!checkNum(n)) {
-            n += 2;
-        }
-        return n;
+  int getNum(int n) {
+    if (n % 2 == 0) {
+      n++;
     }
+    while (!checkNum(n)) {
+      n += 2;
+    }
+    return n;
+  }
 };
-
 
 HashTable::HashTable(int c) {
   int size = getNum(c);
@@ -81,8 +78,7 @@ int main() {
   HashTable h(size);
 
   for (int i = 0; i < size; i++)
-    h.insert(key[i],
-     data[i]);
+    h.insert(key[i], data[i]);
 
   h.deleteNode(12);
   h.displayTable();
