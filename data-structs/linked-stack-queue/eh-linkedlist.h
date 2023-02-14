@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* TODO: Maybe make this generic? (void* anyone??) */
 typedef struct Node {
   int val;
   struct Node *next;
