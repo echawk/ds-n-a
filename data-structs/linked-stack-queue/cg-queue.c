@@ -12,7 +12,7 @@ queue *createQueue() {
   return q;
 }
 
-void queueAdd(queue *q, char* s) {
+void queueAdd(queue *q, char *s) {
   node *link = createNode(s, NULL);
   if (q->front == NULL) {
     q->front = q->rear = link;

@@ -2,16 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-node* top;
+node *top;
 
 void init() { top = NULL; }
-void push(char* s) { top = createNode(s, top); }
+void push(char *s) { top = createNode(s, top); }
 void pop() { deleteNode(top->data, &top); }
-char* getTop() { return top->data; }
+char *getTop() { return top->data; }
 int isEmpty() { return top == NULL; }
 
-char* peek() {
-  char* s = top->data;
+char *peek() {
+  char *s = top->data;
   return s;
 }
 

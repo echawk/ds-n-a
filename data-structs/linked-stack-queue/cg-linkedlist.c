@@ -24,7 +24,7 @@ int listSize(node *n) {
 
 /*function to create a node with data/link
  * and giving it a space in memory*/
-node *createNode(char* s, node *n) {
+node *createNode(char *s, node *n) {
   node *newNode;
   newNode = (node *)malloc(sizeof(node));
   newNode->data = s;
@@ -32,7 +32,7 @@ node *createNode(char* s, node *n) {
   return newNode;
 }
 
-node *findNode(char* s, node *n) {
+node *findNode(char *s, node *n) {
   node *curr = n;
   if (n != NULL) {
     while (curr->data != s) {
@@ -46,7 +46,7 @@ node *findNode(char* s, node *n) {
   return curr;
 }
 
-void deleteNode(char* s, node **n) {
+void deleteNode(char *s, node **n) {
   node *curr = *n;
   node *prev = NULL;
   if (n != NULL) {
