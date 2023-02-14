@@ -1,0 +1,9 @@
+#!/bin/sh -x
+
+find . -type f -name *.py |
+       xargs black
+
+for ft in c h cpp; do
+    find . -type f -name *."$ft" |
+        xargs clang-format -style=llvm -i
+done
