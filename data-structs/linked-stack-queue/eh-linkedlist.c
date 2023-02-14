@@ -1,4 +1,5 @@
 #include "eh-linkedlist.h"
+#include <stdio.h>
 
 int main() {
 
@@ -34,5 +35,16 @@ int main() {
   print_LinkedList(ll);
   printf("size of ll: %d\n", ll.size);
 
+  Node_T *n = nodeAt_LinkedList(&ll, 3);
+  printf("%d\n", n->val);
+
+  Node_T *p = parentOf_LinkedList(&ll, n);
+  printf("%d\n", p->val);
+
+  print_LinkedList(ll);
+  swap_LinkedList(&ll, 1, 4);
+  print_LinkedList(ll);
+
+  free_LinkedList(&ll);
   return 0;
 }
