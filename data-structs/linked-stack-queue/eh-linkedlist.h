@@ -164,11 +164,13 @@ void free_LinkedList(LinkedList_T *ll) {
 }
 
 int quickSort_partition(LinkedList_T *ll, int low, int high) {
-  int pivot = nodeAt_LinkedList(ll, high)->val;
+  Node_T *pivot_Node = nodeAt_LinkedList(ll, high);
+  int pivot = pivot_Node->val;
   int i = low - 1;
   int j;
   for (j = low; j <= high - 1; j++) {
-    if (nodeAt_LinkedList(ll, j)->val < pivot) {
+    Node_T *n = nodeAt_LinkedList(ll, j);
+    if (n->val < pivot) {
       i++;
       swap_LinkedList(ll, i, j);
     }

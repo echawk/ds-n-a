@@ -45,6 +45,9 @@ int main() {
   swap_LinkedList(&ll, 1, 4);
   print_LinkedList(ll);
 
+  quickSort_LinkedList(&ll);
+  print_LinkedList(ll);
+
   free_LinkedList(&ll);
   return 0;
 }
