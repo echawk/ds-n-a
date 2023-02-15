@@ -1,12 +1,12 @@
 import random
-
+import array
 
 def get_max(lst):
     max_ind = 0
-    for i in range(len(lst)):
-        if lst[i] > lst[max_ind]:
+    for i in range(lst.size):
+        if lst.arr[i] > lst.arr[max_ind]:
             max_ind = i
-    return lst[max_ind]
+    return lst.arr[max_ind]
 
 
 def bucket_sort(lst):
@@ -15,23 +15,24 @@ def bucket_sort(lst):
     # Fill bucket list w/ 0s
     for i in range(mx):
         bucket.append(0)
-    for j in range(len(lst)):
-        bucket[lst[j] - 1] += 1
+    for j in range(lst.size):
+        bucket[lst.arr[j] - 1] += 1
     k = 0
     m = 0
     while k < mx:
         while bucket[k] > 0:
-            lst[m] = k
+            lst.arr[m] = k
             m += 1
             bucket[k] -= 1
         k += 1
 
 
 if __name__ == "__main__":
-    l = []
-    n = 100
-    for i in range(n):
-        l.append(random.randint(0, n))
-    print(l)
-    bucket_sort(l)
-    print(l)
+    array = array.Arr_T()
+    array.make_Arr(100)
+    array.populate_Arr()
+    print("Array before sorting: ")
+    array.print_Arr()
+    bucket_sort(array)
+    print("Array after sorting: ")
+    array.print_Arr()

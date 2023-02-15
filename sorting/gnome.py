@@ -1,24 +1,24 @@
 import random
+import array
 
 
 def gnome_sort(lst):
     pos = 0
 
-    while pos < len(lst):
-        if (pos == 0) or (lst[pos] >= lst[pos - 1]):
+    while pos < lst.size:
+        if (pos == 0) or (lst.arr[pos] >= lst.arr[pos - 1]):
             pos += 1
         else:
-            t = lst[pos]
-            lst[pos] = lst[pos - 1]
-            lst[pos - 1] = t
+            lst.swap(pos, pos-1)
             pos -= 1
 
 
 if __name__ == "__main__":
-    l = []
-    n = 100
-    for i in range(n):
-        l.append(random.randint(0, n))
-    print(l)
-    gnome_sort(l)
-    print(l)
+    array = array.Arr_T()
+    array.make_Arr(100)
+    array.populate_Arr()
+    print("Array before sorting: ")
+    array.print_Arr()
+    gnome_sort(array)
+    print("Array after sorting: ")
+    array.print_Arr()
