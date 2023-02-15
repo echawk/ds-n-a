@@ -1,4 +1,3 @@
-import random
 import array
 
 def get_max(lst):

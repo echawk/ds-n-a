@@ -1,4 +1,3 @@
-import random
 import array
 
 
@@ -36,12 +35,3 @@ if __name__ == "__main__":
     quick_sort(array)
     print("Array after sorting: ")
     array.print_Arr()
-    '''
-    l = []
-    n = 100
-    for i in range(n):
-        l.append(random.randint(0, n))
-    print(l)
-    quick_sort(l)
-    print(l)
-    '''
