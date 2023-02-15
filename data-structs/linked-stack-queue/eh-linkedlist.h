@@ -162,3 +162,29 @@ void free_LinkedList(LinkedList_T *ll) {
   }
   ll->size = 0;
 }
+
+int quickSort_partition(LinkedList_T *ll, int low, int high) {
+  int pivot = nodeAt_LinkedList(ll, high)->val;
+  int i = low - 1;
+  int j;
+  for (j = low; j <= high - 1; j++) {
+    if (nodeAt_LinkedList(ll, j)->val < pivot) {
+      i++;
+      swap_LinkedList(ll, i, j);
+    }
+  }
+  swap_LinkedList(ll, i + 1, high);
+  return i + 1;
+}
+
+void quickSort_driver(LinkedList_T *ll, int low, int high) {
+  if (low < high) {
+    int pi = quickSort_partition(ll, low, high);
+    quickSort_driver(ll, low, pi - 1);
+    quickSort_driver(ll, pi + 1, high);
+  }
+}
+
+void quickSort_LinkedList(LinkedList_T *ll) {
+  quickSort_driver(ll, 0, ll->size - 1);
+}
