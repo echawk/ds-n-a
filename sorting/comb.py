@@ -1,35 +1,28 @@
-import random
+import array
 
-gap_coeff = 10.0 / 13.0
+GAPCOEFF = 10.0 / 13.0
 
-
-# FIXME
-def comb_sort(lst):
-    i = len(lst)
-    j = i
-    gap = i
-    swapped_p = True
-    while gap > 1 or swapped_p:
-        gap = gap * gap_coeff
+def combSort(A):
+    gap = A.size
+    swapped = True
+    while gap > 1 or swapped:
+        gap = int(gap * GAPCOEFF)
         if gap < 1:
             gap = 1
-        swapped_p = False
-        j = gap
-        for i in range(len(lst)):
-            print(f"j {int(j)}")
-            if lst[i] > lst[int(j)]:
-                t = lst[i]
-                lst[i] = lst[int(j)]
-                lst[int(j)] = lst[i]
-                swapped_p = True
-            j += 1
+        swapped = False
+        i = 0
+        for j in range(gap, A.size):
+            if A.arr[i] > A.arr[j]:
+                A.swap(i, j)
+                swapped = True
+            i += 1
 
-
-if __name__ == "__main__":
-    l = []
-    n = 100
-    for i in range(n):
-        l.append(random.randint(0, n))
-    print(l)
-    comb_sort(l)
-    print(l)
+'''MAIN'''
+array = array.Arr_T()
+array.make_Arr(100)
+array.populate_Arr()
+print("Array before sorting: ")
+array.print_Arr()
+combSort(array)
+print("Array after sorting: ")
+array.print_Arr()
