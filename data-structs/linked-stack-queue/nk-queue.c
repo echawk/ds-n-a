@@ -17,7 +17,7 @@ int rem(Node *head) { // Removes from front
     int x = head->data;
     Node *temp = head;
     head = head->next;
-    // free(temp);
+    free(temp);
     return (x);
   }
 }
