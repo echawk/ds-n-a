@@ -33,16 +33,17 @@ void appendTo_LinkedList(LinkedList_T *ll, int v) {
     curr = curr->next;
   }
   curr->next = make_Node(v);
-  ll->size += 1;
+  ll->size++;
 }
 
 void prependTo_LinkedList(LinkedList_T *ll, int v) {
   Node_T *nn = make_Node(v);
   nn->next = ll->head;
   ll->head = nn;
-  ll->size += 1;
+  ll->size++;
 }
 
+// FIXME: This does not work correctly.
 void insertAt_LinkedList(LinkedList_T *ll, int ind, int v) {
   if (ind > ll->size || ind < 0)
     return;
@@ -53,12 +54,12 @@ void insertAt_LinkedList(LinkedList_T *ll, int ind, int v) {
   int curr_ind = 0;
   while (curr_ind < (ind - 1)) {
     curr = curr->next;
-    curr_ind += 1;
+    curr_ind++;
   }
   Node_T *new_next = curr->next->next;
   curr->next = make_Node(v);
   curr->next->next = new_next;
-  ll->size += 1;
+  ll->size++;
 }
 
 void print_LinkedList(LinkedList_T ll) {
@@ -103,7 +104,7 @@ void removeAt_LinkedList(LinkedList_T *ll, int ind) {
   int curr_ind = 0;
   while (curr_ind < (ind - 1)) {
     curr = curr->next;
-    curr_ind += 1;
+    curr_ind++;
   }
   Node_T *new_next = curr->next->next;
   free(curr->next);
@@ -127,7 +128,7 @@ Node_T *nodeAt_LinkedList(LinkedList_T *ll, int ind) {
 }
 
 Node_T *parentOf_LinkedList(LinkedList_T *ll, Node_T *node) {
-  if (ll->head == NULL)
+  if (ll->head == NULL || ll->head == node)
     return NULL;
   Node_T *curr = ll->head;
   while (curr->next != node) {
@@ -141,6 +142,8 @@ void swap_LinkedList(LinkedList_T *ll, int ind1, int ind2) {
     return;
   if (ind2 < 0 || ind2 > ll->size)
     return;
+  if (ind1 == ind2)
+    return;
   Node_T *node1 = nodeAt_LinkedList(ll, ind1);
   Node_T *par1 = parentOf_LinkedList(ll, node1);
   Node_T *node2 = nodeAt_LinkedList(ll, ind2);
@@ -148,11 +151,23 @@ void swap_LinkedList(LinkedList_T *ll, int ind1, int ind2) {
 
   Node_T *par1_n = node1->next;
   Node_T *par2_n = node2->next;
-
-  par1->next = node2;
-  par1->next->next = par1_n;
-  par2->next = node1;
-  par2->next->next = par2_n;
+  // FIXME: DOESN'T WORK, idk why, makes list seemingly infinite...
+  // node1 is the head of the list.
+  if (par1 != NULL) {
+    par1->next = node2;
+    par1->next->next = par1_n;
+  } else {
+    ll->head = node2;
+    ll->head->next = par1_n;
+  }
+  // node2 is the head of the list.
+  if (par2 != NULL) {
+    par2->next = node1;
+    par2->next->next = par2_n;
+  } else {
+    ll->head = node1;
+    ll->head->next = par2_n;
+  }
 }
 
 /* Roughly works? */
