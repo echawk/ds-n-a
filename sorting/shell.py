@@ -1,30 +1,27 @@
-import random
+import array
 
-
-# FIXME: doesn't end
-def shell_sort(lst):
-    gap = int(len(lst) / 2)
+def shell_sort(A):
+    gap = int(A.size/2)
     while gap > 0:
         x = gap
-        while x < len(lst):
-            y = int(x - gap)
+        while x < A.size:
+            y = x - gap
             while y >= 0:
-                if lst[int(y + gap)] > lst[int(y)]:
+                if A.arr[y + gap] > A.arr[y]:
                     break
                 else:
-                    t = lst[int(y)]
-                    lst[int(y)] = lst[int(y + gap)]
-                    lst[int(y + gap)] = t
-                y -= gap
-            x += 1
-        gap /= 2
+                    A.swap(y, y + gap)
+                y = y - gap
+            x = x + 1
+        gap = int(gap/2)
 
 
 if __name__ == "__main__":
-    l = []
-    n = 100
-    for i in range(n):
-        l.append(random.randint(0, n))
-    print(l)
-    shell_sort(l)
-    print(l)
+    array = array.Arr_T()
+    array.make_Arr(100)
+    array.populate_Arr()
+    print("Array before sorting: ")
+    array.print_Arr()
+    shell_sort(array)
+    print("Array after sorting: ")
+    array.print_Arr()
