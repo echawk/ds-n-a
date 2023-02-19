@@ -37,16 +37,13 @@ void Node::insert_data(int data) {
 }
 
 int Node::get_successor(const int value) {
-	if (this->left == nullptr && this->right == nullptr) {
-		return this->data;
-	}
-	else if (this->left == nullptr){
-		return this->right->get_successor(value);
-	}
-	else if (this->right == nullptr){
-		return this->left->get_successor(value);
-	}
-  else if (this->left->data > value && this->right->data > value) {
+  if (this->left == nullptr && this->right == nullptr) {
+    return this->data;
+  } else if (this->left == nullptr) {
+    return this->right->get_successor(value);
+  } else if (this->right == nullptr) {
+    return this->left->get_successor(value);
+  } else if (this->left->data > value && this->right->data > value) {
     return this->left->get_successor(value);
   }
 }

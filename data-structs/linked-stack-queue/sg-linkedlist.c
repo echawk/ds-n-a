@@ -148,7 +148,7 @@ int main(void) {
   node_delete_at_place(&head, 1);
   node_print(head);
 
-	free(head);
+  free(head);
 
   exit(EXIT_SUCCESS);
 }
