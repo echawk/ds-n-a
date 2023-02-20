@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Compile with the C99 standard, all warnings enabled, and with GDB support.
+CFLAGS="-std=c99 -Wall -pedantic -g"
+
+# Compile 2 versions of array.c, one for the cli versions of the sorting
+# algorithms, and one for the SDL2 based visualizer.
+"${CC:-cc}" $CFLAGS -c array.c -o array.o
+"${CC:-cc}" $CFLAGS -DVISUALIZE -c array.c -o array-viz.o
+for alg in bucket.c cocktail.c comb.c gnome.c insertion.c quick.c shell.c radix.c; do
+    # Check if the file is formatted according to 'clang-format', and
+    # fix the formatting if it is incorrect.
+    if ! clang-format --style=llvm "$alg" | diff - "$alg"; then
+        echo "Formatting $alg"
+        clang-format --style=llvm -i "$alg"
+    fi
+    "${CC:-cc}" $CFLAGS -DASLIB -c "${alg%%.c}.o" "$alg"
+    "${CC:-cc}" $CFLAGS -o "${alg%%.c}" array.o "$alg"
+    "${CC:-cc}" $CFLAGS -lSDL2 -o "vis-${alg%%.c}" "${alg%%.c}.o" array-viz.o visualizer.c
+done
