@@ -17,9 +17,11 @@ int main() {
   print_LinkedList(ll);
   printf("size of ll: %d\n", ll.size);
 
-  insertAt_LinkedList(&ll, 2, 7);
-  print_LinkedList(ll);
-  printf("size of ll: %d\n", ll.size);
+  // insertAt_LinkedList(&ll, 2, 7);
+  // print_LinkedList(ll);
+  // printf("size of ll: %d\n", ll.size);
+
+  // printf("%x", parentOf_LinkedList(&ll, ll.head)->val);
 
   for (int i = 9; i > 0; i--) {
     prependTo_LinkedList(&ll, i);
@@ -43,6 +45,10 @@ int main() {
 
   print_LinkedList(ll);
   swap_LinkedList(&ll, 1, 4);
+  print_LinkedList(ll);
+  printf("size of ll: %d\n", ll.size);
+
+  quickSort_LinkedList(&ll);
   print_LinkedList(ll);
 
   free_LinkedList(&ll);
