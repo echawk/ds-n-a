@@ -14,7 +14,7 @@ def cocktail_sort(A):
             break
         swapped = False
         e -= 1
-        for i in range (e, s, -1):
+        for i in range (e, s - 1, -1):
             if A.arr[i] > A.arr[i + 1]:
                 A.swap(i, i + 1)
                 swapped = True
