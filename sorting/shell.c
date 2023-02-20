@@ -1,6 +1,7 @@
-#include "array.h"
 #include <stdbool.h>
 #include <stdio.h>
+
+#include "array.h"
 
 void shell_sort(Arr_T A) {
   int gap = A.size / 2;

@@ -10,6 +10,10 @@ private:
   int get_successor(const int value);
 
 public:
+	// constructors
+	Node(int data);
+	// destructor
+	~Node();
   // accessors
   int get_data(void);
   Node *get_left_link(void);
@@ -23,6 +27,7 @@ public:
   Node *remove_data(int data);
   void remove_node(Node *node);
   Node *search_for_data(int data);
+	void print(Node* node);
 };
 
 #endif

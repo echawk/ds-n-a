@@ -1,4 +1,17 @@
+#include <iostream>
+
 #include "sg-bst.h"
+
+Node::Node(int data){
+	this->data = data;
+	this->left = nullptr;
+	this->right = nullptr;
+}
+
+Node::~Node(){
+	free(this->left);
+	free(this->right);
+}
 
 int Node::get_data(void) { return this->data; }
 
@@ -24,14 +37,24 @@ void Node::set_right_link(Node *right) {
 
 // typical BST functions
 void Node::insert_data(int data) {
-  if (this == nullptr) {
-    this->data = data;
-    return;
-  }
+	if (this->left == nullptr && this->right == nullptr) {
+		this->data = data;
+	}
   if (data < this->data) {
-    this->left->insert_data(data);
-  } else if (data > this->data) {
-    this->right->insert_data(data);
+		if(this->left == nullptr){
+			this->left = new Node(data);
+		}
+		else{
+    	this->left->insert_data(data);
+		}
+  }
+	else if (data > this->data) {
+    if(this->right == nullptr){
+			this->right = new Node(data);
+		}
+		else{
+    	this->right->insert_data(data);
+		}
   }
   return;
 }
@@ -49,12 +72,18 @@ int Node::get_successor(const int value) {
   else if (this->left->data > value && this->right->data > value) {
     return this->left->get_successor(value);
   }
+	else if (this->left->data > value){
+		return this->left->get_successor(value);
+	}
+	else if (this->right->data > value){
+		return this->right->get_successor(value);
+	}
+	else{
+		return INT32_MIN;
+	}
 }
 
 Node *Node::remove_data(int data) {
-  if (this == nullptr) {
-    return nullptr;
-  }
   if (data == this->data) {
     if (this->left == nullptr && this->right == nullptr) {
 
@@ -72,8 +101,27 @@ Node *Node::remove_data(int data) {
   if (data < this->data) {
     return this->left->remove_data(data);
   }
+	return nullptr;	//todo: this function
 }
 
 void Node::remove_node(Node *node) {}
 
-Node *Node::search_for_data(int data) {}
+Node *Node::search_for_data(int data) {
+	return nullptr;	//todo: this function
+}
+
+void Node::print(Node* node){
+	if(node == nullptr){
+		return;
+	}
+	else if(node->left == nullptr && node->right == nullptr){
+		std::cout << node->data << " ";
+		return;
+	}
+
+	print(node->left);
+	std::cout << node->data << " ";
+	print(node->right);
+
+	return;
+}
