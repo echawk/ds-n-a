@@ -7,7 +7,7 @@ CFLAGS="-std=c99 -Wall -pedantic -g"
 # algorithms, and one for the SDL2 based visualizer.
 "${CC:-cc}" $CFLAGS -c array.c -o array.o
 "${CC:-cc}" $CFLAGS -DVISUALIZE -c array.c -o array-viz.o
-for alg in bucket.c cocktail.c comb.c gnome.c insertion.c quick.c shell.c radix.c; do
+for alg in bucket.c cocktail.c comb.c gnome.c heap.c insertion.c quick.c shell.c radix.c; do
     # Check if the file is formatted according to 'clang-format', and
     # fix the formatting if it is incorrect.
     if ! clang-format --style=llvm "$alg" | diff - "$alg"; then
