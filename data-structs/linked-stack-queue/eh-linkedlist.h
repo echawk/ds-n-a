@@ -155,18 +155,18 @@ void swap_LinkedList(LinkedList_T *ll, int ind1, int ind2) {
   // node1 is the head of the list.
   if (par1 != NULL) {
     par1->next = node2;
-    par1->next->next = par1_n;
+    node2->next = par1_n;
   } else {
     ll->head = node2;
-    ll->head->next = par1_n;
+    node2->next = par1_n;
   }
   // node2 is the head of the list.
   if (par2 != NULL) {
     par2->next = node1;
-    par2->next->next = par2_n;
+    node1->next = par2_n;
   } else {
     ll->head = node1;
-    ll->head->next = par2_n;
+    node1->next = par2_n;
   }
 }
 
