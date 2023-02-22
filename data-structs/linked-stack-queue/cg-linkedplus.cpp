@@ -51,9 +51,14 @@ void LinkedList::addToEnd(int s){
 }
 
 void LinkedList::addToFront(int s){
-    Node* temp = head;
-    Node* newNode = new Node(s, temp);
-    head = newNode;
+    Node* newNode = new Node(s, NULL);
+    if (head == NULL){
+        head = newNode;
+    }else{
+        Node* temp = head;
+        newNode = new Node(s, temp);
+        head = newNode;
+    }
 }
 
 
