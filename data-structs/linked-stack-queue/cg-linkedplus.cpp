@@ -1,38 +1,65 @@
 #include <iostream>
-#include <string>
+#include <cstdlib>
 using namespace std;
 
 class Node{
 public:
-    string data;
+    int data;
     Node* next;
 
-    Node* createNode(string, Node*);
-    Node* findNode(string, Node*);
-    void deleteNode(string, Node**);
+    Node(int data){
+        this->data = data;
+        this->next = NULL;
+    }
+
+    Node(int data, Node* next){
+        this->data = data;
+        this->next = next;
+    }
+};
+
+class LinkedList{
+public:
+    Node* head;
+
+    LinkedList(){
+        head = NULL;
+    }
+
+    void addToEnd(int);
+    void addToFront(int);
+    Node* findNode(int);
+    void deleteNode(int, Node**);
     int listSize(Node*);
     void printList(Node*);
 };
 
-int Node::listSize(Node* n){
-    Node* curr;
-    int count = 0;
-    for (curr = n; curr != NULL; curr = curr->next){
-        count++;
-    }
-    return count;
+
+void LinkedList::addToEnd(int s){
+    Node* newNode = new Node(s);
+    if (head == NULL){
+        head = newNode;
+    }else{
+        Node* curr = head;
+        if (curr != NULL){
+            while (curr->next != NULL){
+                curr = curr->next;
+            }
+        }
+        curr->next = newNode;
+    }   
 }
 
-Node* Node::createNode(string s, Node* n){
-        Node *newNode = (Node*)malloc(sizeof(Node));
-        newNode->data = s;
-        newNode->next = n;
-        return newNode;
+void LinkedList::addToFront(int s){
+    Node* temp = head;
+    Node* newNode = new Node(s, temp);
+    head = newNode;
 }
 
-Node* Node::findNode(string s, Node* n){
-    Node* curr = n;
-    if (n != NULL){
+
+Node* LinkedList::findNode(int s){
+    Node* curr = head;
+    if (head != NULL){
         while (curr->data != s){
             if (curr->next != NULL){
                 curr = curr->next;
@@ -44,8 +71,7 @@ Node* Node::findNode(string s, Node* n){
     return curr;
 }
 
-
-void Node::deleteNode(string s, Node** n){
+void LinkedList::deleteNode(int s, Node** n){
     Node* curr = *n;
     Node* prev = NULL;
     if (n != NULL){
@@ -67,29 +93,41 @@ void Node::deleteNode(string s, Node** n){
 
 }
 
-void Node::printList(Node* n){
-    while (n != NULL){
-        cout << n->data << " ";
-        n = n->next;
+int LinkedList::listSize(Node* n){
+    Node* curr;
+    int count = 0;
+    for (curr = n; curr != NULL; curr = curr->next){
+        count++;
     }
+    return count;
 }
 
+void LinkedList::printList(Node* n){
+    while (n != NULL) {
+        printf("%d ", n->data);
+        n = n->next;
+  }
+}
+
+
 int main(){
-    Node* temp;
-    Node* sixth = temp->createNode("Manjaro", NULL);
-    Node* fifth = temp->createNode("Ubuntu", sixth);
-    Node* fourth = temp->createNode("Fedora", fifth);
-    Node* third = temp->createNode("Arch", fourth);
-    Node* second = temp->createNode("Mint", third);
-    Node* head = temp->createNode("Debian", second);
+    srand((unsigned) time(NULL));
+    LinkedList list = LinkedList();
+    list.addToEnd(rand() % 50);
+    list.addToEnd(rand() % 50);
+    list.addToEnd(11);
+    list.addToEnd(rand() % 50);
+    list.addToEnd(rand() % 50);
+    list.addToEnd(19);
+    list.addToFront(25);
     printf("Original list: ");
-    head->printList(head);
+    list.printList(list.head);
     printf("\n");
-    printf("\tList size: %d", head->listSize(head));
-    head->deleteNode("Ubuntu", &head);
+    printf("\tList size: %d", list.listSize(list.head));
+    list.deleteNode(11, &list.head);
     printf("\nNew list: ");
-    head->printList(head);
+    list.printList(list.head);
     printf("\n");
-    printf("\tList size: %d", head->listSize(head));
+    printf("\tList size: %d", list.listSize(list.head));
     return 0;
 }
