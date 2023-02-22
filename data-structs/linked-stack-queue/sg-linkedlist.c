@@ -4,7 +4,7 @@
 
 #include "sg-linkedlist.h"
 
-#define DEBUG_STATEMENTS 1
+#define DEBUG_STATEMENTS 0
 
 node_t *node_init(int _data, node_t *_next) {
   node_t *ret = (node_t *)calloc(1, sizeof(node_t));

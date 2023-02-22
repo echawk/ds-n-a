@@ -3,13 +3,15 @@
 #include "sg-bst.h"
 
 int main(void){
-	Node head(10);
-	head.insert_data(20);
-	head.insert_data(5);
-	head.insert_data(8);
-	head.insert_data(11);
+	BST tree;
 
-	head.print(&head);
+	tree.insert(1);
+	tree.insert(-10);
+	tree.insert(22);
+	tree.insert(12);
+	tree.insert(19);
+	tree.insert(6);
+	tree.print();
 
 	return 0;
 }
