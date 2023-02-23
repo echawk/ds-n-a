@@ -24,7 +24,7 @@ void printList(Node *current) {
 }
 
 int main() {
-    Node* head = createNode(1, NULL);
-    head->next = createNode(2, NULL);
-    printList(head);
+  Node *head = createNode(1, NULL);
+  head->next = createNode(2, NULL);
+  printList(head);
 }

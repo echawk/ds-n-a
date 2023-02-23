@@ -3,42 +3,44 @@
 
 class Node {
 private:
-  int   data;
-  Node* left;
-  Node* right;
-public:
-	// constructor
-	Node(int data);
-	// destructor
-	~Node();
-  // accessors
-  int   get_data(void);
-  Node* get_left_link(void);
-  Node* get_right_link(void);
-  // mutators
-  void  set_data(int data);
-  void  set_left_link(Node *left);
-  void  set_right_link(Node *right);
+  int data;
+  Node *left;
+  Node *right;
 
-	static void print_in_order(Node* node);
+public:
+  // constructor
+  Node(int data);
+  // destructor
+  ~Node();
+  // accessors
+  int get_data(void);
+  Node *get_left_link(void);
+  Node *get_right_link(void);
+  // mutators
+  void set_data(int data);
+  void set_left_link(Node *left);
+  void set_right_link(Node *right);
+
+  static void print_in_order(Node *node);
 };
 
 class BST {
 private:
-	Node* head;
+  Node *head;
 
-	Node* insert_at_node(const int data, Node* node);
-	Node* search_for_data(const int data, Node* node);
+  Node *insert_at_node(const int data, Node *node);
+  Node *search_for_data(const int data, Node *node);
+
 public:
-	//constructor
-	BST();
-	//destructor
-	~BST();
-	//typical BST functions
-	Node* insert(const int data);
-	Node* min_value_node();
-	Node* remove(const int data);
-	void  print();
+  // constructor
+  BST();
+  // destructor
+  ~BST();
+  // typical BST functions
+  Node *insert(const int data);
+  Node *min_value_node();
+  Node *remove(const int data);
+  void print();
 };
 
 #endif

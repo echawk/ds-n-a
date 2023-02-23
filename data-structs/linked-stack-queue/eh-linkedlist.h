@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #define DEBUG_STATEMENTS 0
@@ -146,16 +146,15 @@ void swap_LinkedList(LinkedList_T *ll, int ind1, int ind2) {
     return;
   if (ind1 == ind2)
     return;
-	
-	
+
   Node_T *node1 = nodeAt_LinkedList(ll, ind1);
   Node_T *node2 = nodeAt_LinkedList(ll, ind2);
 
-	if (node1->val != node2->val){
-		node1->val = node1->val ^ node2->val;
-		node2->val = node1->val ^ node2->val;
-		node1->val = node1->val ^ node2->val;
-	}
+  if (node1->val != node2->val) {
+    node1->val = node1->val ^ node2->val;
+    node2->val = node1->val ^ node2->val;
+    node1->val = node1->val ^ node2->val;
+  }
 }
 
 /* Roughly works? */
