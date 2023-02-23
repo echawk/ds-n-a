@@ -29,7 +29,7 @@ private:
   Node *head;
 
   Node *insert_at_node(const int data, Node *node);
-  Node *search_for_data(const int data, Node *node);
+  Node *search_at_node(const int data, Node *node);
 
 public:
   // constructor
@@ -40,6 +40,9 @@ public:
   Node *insert(const int data);
   Node *min_value_node();
   Node *remove(const int data);
+	Node *in_order_successor(Node *node);
+  Node *minimum(Node *node);
+  Node *maximum(Node *node);
   void print();
 };
 

@@ -43,13 +43,11 @@ void Node::set_right_link(Node *right) {
 }
 
 void Node::print_in_order(Node *node) {
-  if (node == nullptr) {
-    return;
+  if (node != nullptr) {
+    print_in_order(node->left);
+  	std::cout << node->data << " ";
+  	print_in_order(node->right);
   }
-
-  print_in_order(node->left);
-  std::cout << node->data << " ";
-  print_in_order(node->right);
 
   return;
 }
@@ -62,7 +60,7 @@ BST::~BST() { free(head); }
 
 Node *BST::insert_at_node(const int data, Node *node) {
   if (node == nullptr) {
-    return nullptr; // shouldn't be here; return nullptr to indicate bad time
+    return nullptr; // shouldn't get here; return nullptr to indicate bad time
   }
   if (data < node->get_data()) {
     if (node->get_left_link() == nullptr) {
@@ -87,31 +85,62 @@ Node *BST::insert(const int data) {
   if (head == nullptr) {
     head = new Node(data);
     return head;
-  } else {
-    return insert_at_node(data, head);
-  }
+  } 
+
+  return insert_at_node(data, head);
 }
 
-Node *BST::search_for_data(const int data, Node *node) {
-  if (node == nullptr) {
-    return nullptr; // should be able to get here, indicates data not found
+Node *BST::search_at_node(const int data, Node *node) {
+  if (node == nullptr || data == node->get_data()) {
+    return node;
+  }
+ 
+  if (data < node->get_data()) {
+    return search_at_node(data, node->get_left_link());
   }
 
-  if (data == node->get_data()) {
-    return node;
-  } else if (data < node->get_data()) {
-    search_for_data(data, node->get_left_link());
-  } else {
-    search_for_data(data, node->get_right_link());
-  }
+	return search_at_node(data, node->get_right_link());
+}
+
+Node *BST::remove(const int data){
+	Node *temp = search_at_node(data, head);
+
+	if(temp == nullptr){
+		return nullptr;
+	}
+
+}
+
+Node *BST::minimum(Node *node){
+	Node *temp = node;
+	while(temp->get_left_link() != nullptr){
+		temp = temp->get_left_link();
+	}
+	return temp;
+}
+
+Node *BST::maximum(Node *node){
+	Node *temp = node;
+	while(temp->get_right_link() != nullptr){
+		temp = temp->get_right_link();
+	}
+	return temp;
+}
+
+Node *BST::in_order_successor(Node *node){
+	if(node->get_right_link() != nullptr){
+		return minimum(node->get_right_link());
+	}
+	else{
+		Node *temp = node;
+		while(temp != nullptr && node == temp->get_right_link()){
+			node = temp;
+			temp = temp;
+		}
+	}
 }
 
 void BST::print() {
-  if (head == nullptr) {
-    std::cout << "Empty list" << std::endl;
-    return;
-  }
-
   Node::print_in_order(head);
   std::cout << std::endl;
 
