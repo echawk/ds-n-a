@@ -1,6 +1,8 @@
-#include <stddef.h>
 #include <stdio.h>
+#include <stddef.h>
 #include <stdlib.h>
+
+#define DEBUG_STATEMENTS 0
 
 /* TODO: Maybe make this generic? (void* anyone??) */
 typedef struct Node {
@@ -144,36 +146,16 @@ void swap_LinkedList(LinkedList_T *ll, int ind1, int ind2) {
     return;
   if (ind1 == ind2)
     return;
+	
+	
   Node_T *node1 = nodeAt_LinkedList(ll, ind1);
-  Node_T *par1 = parentOf_LinkedList(ll, node1);
   Node_T *node2 = nodeAt_LinkedList(ll, ind2);
-  Node_T *par2 = parentOf_LinkedList(ll, node2);
 
-  Node_T *par1_n = node1->next;
-  Node_T *par2_n = node2->next;
-  // FIXME: DOESN'T WORK, idk why, makes list seemingly infinite...
-  // node1 is the head of the list.
-  if (par1 != NULL) {	//node1 is the head
-		Node_T *temp = node1->next;
-		node1->next = node2->next;	//point node1 at what node2 is pointing at
-		node2->next = temp;	//point node2 at par2
-		par2->next = node1;	//point par2 at node1
-		ll->head = node2;		//set the head to node2; effectively this is a small reversal
-  } else {
-    ll->head = node2;
-    node2->next = par1_n;
-  }
-  
-  if (par2 != NULL) {	// node2 is the head of the list.
-    Node_T *temp = node2->next;
-		node2->next = node1->next;	//point node1 at what node2 is pointing at
-		node1->next = temp;	//point node2 at par2
-		par1->next = node2;	//point par2 at node1
-		ll->head = node1;		//set the head to node2; effectively this is a small reversal
-  } else {
-    ll->head = node1;
-    node1->next = par2_n;
-  }
+	if (node1->val != node2->val){
+		node1->val = node1->val ^ node2->val;
+		node2->val = node1->val ^ node2->val;
+		node1->val = node1->val ^ node2->val;
+	}
 }
 
 /* Roughly works? */
