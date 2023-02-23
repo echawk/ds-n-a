@@ -1,8 +1,8 @@
-#include <stddef.h>
 #include <stdio.h>
+#include <stddef.h>
 #include <stdlib.h>
 
-#define DEBUG_STATEMENTS 0
+#define DEBUG_STATEMENTS 1
 
 /* TODO: Maybe make this generic? (void* anyone??) */
 typedef struct Node {
@@ -146,14 +146,38 @@ void swap_LinkedList(LinkedList_T *ll, int ind1, int ind2) {
     return;
   if (ind1 == ind2)
     return;
-
+	//swap the two indices so ind1 is always prior to ind2
+	if (ind2 < ind1) {	
+		ind1 = ind1 ^ ind2;
+		ind2 = ind1 ^ ind2;
+		ind1 = ind1 ^ ind2;
+	}
+	
   Node_T *node1 = nodeAt_LinkedList(ll, ind1);
+  Node_T *par1 = parentOf_LinkedList(ll, node1);
   Node_T *node2 = nodeAt_LinkedList(ll, ind2);
+  Node_T *par2 = parentOf_LinkedList(ll, node2);
 
-  if (node1->val != node2->val) {
-    node1->val = node1->val ^ node2->val;
-    node2->val = node1->val ^ node2->val;
-    node1->val = node1->val ^ node2->val;
+  Node_T *par1_n = node1->next;
+  Node_T *par2_n = node2->next;
+  // FIXME: DOESN'T WORK, idk why, makes list seemingly infinite...
+  // node1 is the head of the list.
+  if (par1 != NULL) {	//node1 is the head
+		Node_T *temp = node1->next;
+		node1->next = node2->next;
+		if (temp != par2) {	//if the nodes are not distance 2 away
+			node2->next = temp;	//point node2 at par2
+		}
+		else {
+			node2->next = par2;
+		}
+		par2_n = node1;
+		ll->head = node2;		//set the head to node2
+  } 
+	else {	//node1 is not the head
+    par2_n = node2->next;
+		node2->next = node1;
+		par1_n = node2;
   }
 }
 
