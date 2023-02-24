@@ -2,8 +2,8 @@
 
 #include "sg-bst.h"
 
-int main(void) {
-  BST tree;
+int main (void) {
+  BST<int> tree;
 
   tree.insert(1);
   tree.insert(-10);

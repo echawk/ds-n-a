@@ -4,45 +4,53 @@
 
 // constructor
 
-Node::Node(int data) {
+template <class T>
+Node<T>::Node(T data) {
   this->data = data;
   this->left = nullptr;
   this->right = nullptr;
 }
 
 // destructor
-
-Node::~Node() {
+template <class T>
+Node<T>::~Node() {
   free(this->left);
   free(this->right);
 }
 
 // accessors
 
-int Node::get_data(void) { return this->data; }
+template <class T>
+T Node<T>::get_data(void) { return this->data; }
 
-Node *Node::get_left_link(void) { return this->left; }
+template <class T>
+Node<T> *Node<T>::get_left_link(void) { return this->left; }
 
-Node *Node::get_right_link(void) { return this->right; }
+template <class T>
+Node<T> *Node<T>::get_right_link(void) { return this->right; }
 
 // mutators
 
-void Node::set_data(int data) {
+template <class T>
+void Node<T>::set_data(T data) {
   this->data = data;
   return;
 }
 
-void Node::set_left_link(Node *left) {
+template <class T>
+void Node<T>::set_left_link(Node<T> *left) {
   this->left = left;
   return;
 }
 
-void Node::set_right_link(Node *right) {
+template <class T>
+void Node<T>::set_right_link(Node<T> *right) {
   this->right = right;
   return;
 }
 
-void Node::print_in_order(Node *node) {
+template <class T>
+void Node<T>::print_in_order(Node<T> *node) {
   if (node != nullptr) {
     print_in_order(node->left);
     std::cout << node->data << " ";
@@ -54,24 +62,27 @@ void Node::print_in_order(Node *node) {
 
 // typical BST functions
 
-BST::BST() { root = nullptr; }
+template <class T>
+BST<T>::BST() { root = nullptr; }
 
-BST::~BST() { free(root); }
+template <class T>
+BST<T>::~BST() { free(root); }
 
-Node *BST::insert_at_node(const int data, Node *node) {
+template <class T>
+Node<T> *BST<T>::insert_at_node(const T data, Node<T> *node) {
   if (node == nullptr) {
     return nullptr; // shouldn't get here; return nullptr to indicate bad time
   }
   if (data < node->get_data()) {
     if (node->get_left_link() == nullptr) {
-      node->set_left_link(new Node(data));
+      node->set_left_link(new Node<T>(data));
       return node->get_left_link();
     } else {
       return insert_at_node(data, node->get_left_link());
     }
   } else if (data > node->get_data()) {
     if (node->get_right_link() == nullptr) {
-      node->set_right_link(new Node(data));
+      node->set_right_link(new Node<T>(data));
       return node->get_right_link();
     } else {
       return insert_at_node(data, node->get_right_link());
@@ -81,7 +92,8 @@ Node *BST::insert_at_node(const int data, Node *node) {
   }
 }
 
-Node *BST::search_at_node(const int data, Node *node) {
+template <class T>
+Node<T> *BST<T>::search_at_node(const T data, Node<T> *node) {
   if (node == nullptr || data == node->get_data()) {
     return node;
   }
@@ -93,7 +105,8 @@ Node *BST::search_at_node(const int data, Node *node) {
   return search_at_node(data, node->get_right_link());
 }
 
-Node *BST::get_parent_node(Node *node, Node *child) {
+template <class T>
+Node<T> *BST<T>::get_parent_node(Node<T> *node, Node<T> *child) {
   if (node == nullptr || child == nullptr || child == root) {
     return nullptr;
   }
@@ -108,17 +121,19 @@ Node *BST::get_parent_node(Node *node, Node *child) {
   return get_parent_node(node->get_right_link(), child);
 }
 
-Node *BST::insert(const int data) {
+template <class T>
+Node<T> *BST<T>::insert(const T data) {
   if (root == nullptr) {
-    root = new Node(data);
+    root = new Node<T>(data);
     return root;
   }
 
   return insert_at_node(data, root);
 }
 
-void BST::remove(const int data) {
-  Node *temp = search_at_node(data, root);
+template <class T>
+void BST<T>::remove(const T data) {
+  Node<T> *temp = search_at_node(data, root);
 
   if(temp == nullptr){
 		return;
@@ -131,7 +146,7 @@ void BST::remove(const int data) {
 		transplant(temp, temp->get_left_link());
 	}
 	else{
-		Node *successor = minimum(temp->get_right_link());
+		Node<T> *successor = minimum(temp->get_right_link());
 		if(successor != temp->get_right_link()){
 			transplant(successor, successor->get_right_link());
 			successor->set_right_link(temp->get_right_link());
@@ -142,11 +157,12 @@ void BST::remove(const int data) {
 	}
 }
 
-Node *BST::in_order_successor(Node *node) {
+template <class T>
+Node<T> *BST<T>::in_order_successor(Node<T> *node) {
   if (node->get_right_link() != nullptr) {
     return minimum(node->get_right_link());
   } else {
-    Node *temp = get_parent_node(root, node);
+    Node<T> *temp = get_parent_node(root, node);
 
     while (temp != nullptr && node == temp->get_right_link()) {
       node = temp;
@@ -157,9 +173,10 @@ Node *BST::in_order_successor(Node *node) {
   }
 }
 
-void BST::transplant(Node *node1, Node *node2){
-	Node *node1_par = get_parent_node(root, node1);
-	Node *node2_par = get_parent_node(root, node2);
+template <class T>
+void BST<T>::transplant(Node<T> *node1, Node<T> *node2){
+	Node<T> *node1_par = get_parent_node(root, node1);
+	Node<T> *node2_par = get_parent_node(root, node2);
 
 	if(node1_par == nullptr){
 		root = node2;
@@ -176,24 +193,27 @@ void BST::transplant(Node *node1, Node *node2){
 	}
 }
 
-Node *BST::minimum(Node *node) {
-  Node *temp = node;
+template <class T>
+Node<T> *BST<T>::minimum(Node<T> *node) {
+  Node<T> *temp = node;
   while (temp->get_left_link() != nullptr) {
     temp = temp->get_left_link();
   }
   return temp;
 }
 
-Node *BST::maximum(Node *node) {
-  Node *temp = node;
+template <class T>
+Node<T> *BST<T>::maximum(Node<T> *node) {
+  Node<T> *temp = node;
   while (temp->get_right_link() != nullptr) {
     temp = temp->get_right_link();
   }
   return temp;
 }
 
-void BST::print() {
-  Node::print_in_order(root);
+template <class T>
+void BST<T>::print() {
+  Node<T>::print_in_order(root);
   std::cout << std::endl;
 
   return;
