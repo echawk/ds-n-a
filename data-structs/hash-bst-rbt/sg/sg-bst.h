@@ -26,7 +26,7 @@ public:
 
 class BST {
 private:
-  Node *head;
+  Node *root;
 
   Node *insert_at_node(const int data, Node *node);
   Node *search_at_node(const int data, Node *node);
@@ -41,6 +41,7 @@ public:
   Node *insert(const int data);
   Node *remove(const int data);
   Node *in_order_successor(Node *node);
+	Node *transplant(Node *node1, Node *node2);
   Node *minimum(Node *node);
   Node *maximum(Node *node);
   void print();

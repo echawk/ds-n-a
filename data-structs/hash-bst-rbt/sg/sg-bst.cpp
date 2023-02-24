@@ -54,9 +54,9 @@ void Node::print_in_order(Node *node) {
 
 // typical BST functions
 
-BST::BST() { head = nullptr; }
+BST::BST() { root = nullptr; }
 
-BST::~BST() { free(head); }
+BST::~BST() { free(root); }
 
 Node *BST::insert_at_node(const int data, Node *node) {
   if (node == nullptr) {
@@ -94,7 +94,7 @@ Node *BST::search_at_node(const int data, Node *node) {
 }
 
 Node *BST::get_parent_node(Node *node, Node *child) {
-  if (node == nullptr || child == nullptr || child == head) {
+  if (node == nullptr || child == nullptr || child == root) {
     return nullptr;
   }
 
@@ -109,16 +109,16 @@ Node *BST::get_parent_node(Node *node, Node *child) {
 }
 
 Node *BST::insert(const int data) {
-  if (head == nullptr) {
-    head = new Node(data);
-    return head;
+  if (root == nullptr) {
+    root = new Node(data);
+    return root;
   }
 
-  return insert_at_node(data, head);
+  return insert_at_node(data, root);
 }
 
 Node *BST::remove(const int data) {
-  Node *temp = search_at_node(data, head);
+  Node *temp = search_at_node(data, root);
 
   if (temp == nullptr) {
     return nullptr;
@@ -130,15 +130,34 @@ Node *BST::in_order_successor(Node *node) {
   if (node->get_right_link() != nullptr) {
     return minimum(node->get_right_link());
   } else {
-    Node *temp = get_parent_node(head, node);
+    Node *temp = get_parent_node(root, node);
 
     while (temp != nullptr && node == temp->get_right_link()) {
       node = temp;
-      temp = get_parent_node(head, temp);
+      temp = get_parent_node(root, temp);
     }
 
     return temp;
   }
+}
+
+Node *BST::transplant(Node *node1, Node *node2){
+	Node *node1_par = get_parent_node(root, node1);
+	Node *node2_par = get_parent_node(root, node2);
+
+	if(node1_par == nullptr){
+		root = node2;
+	}
+	else if(node1 == node1_par->get_left_link()){
+		node1_par->set_left_link(node2);
+	}
+	else{
+		node1_par->set_right_link(node2);
+	}
+
+	if(node2 != nullptr){
+		node2_par = node1_par;
+	}
 }
 
 Node *BST::minimum(Node *node) {
@@ -158,7 +177,7 @@ Node *BST::maximum(Node *node) {
 }
 
 void BST::print() {
-  Node::print_in_order(head);
+  Node::print_in_order(root);
   std::cout << std::endl;
 
   return;
