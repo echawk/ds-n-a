@@ -117,13 +117,29 @@ Node *BST::insert(const int data) {
   return insert_at_node(data, root);
 }
 
-Node *BST::remove(const int data) {
+void BST::remove(const int data) {
   Node *temp = search_at_node(data, root);
 
-  if (temp == nullptr) {
-    return nullptr;
-  }
-  return nullptr;
+  if(temp == nullptr){
+		return;
+	}
+
+	if(temp->get_left_link() == nullptr){
+		transplant(temp, temp->get_right_link());
+	}
+	else if(temp->get_right_link() == nullptr){
+		transplant(temp, temp->get_left_link());
+	}
+	else{
+		Node *successor = minimum(temp->get_right_link());
+		if(successor != temp->get_right_link()){
+			transplant(successor, successor->get_right_link());
+			successor->set_right_link(temp->get_right_link());
+		}
+
+		transplant(temp, successor);
+		successor->set_left_link(temp->get_left_link());
+	}
 }
 
 Node *BST::in_order_successor(Node *node) {
@@ -141,7 +157,7 @@ Node *BST::in_order_successor(Node *node) {
   }
 }
 
-Node *BST::transplant(Node *node1, Node *node2){
+void BST::transplant(Node *node1, Node *node2){
 	Node *node1_par = get_parent_node(root, node1);
 	Node *node2_par = get_parent_node(root, node2);
 
