@@ -30,7 +30,7 @@ private:
 
   Node *insert_at_node(const int data, Node *node);
   Node *search_at_node(const int data, Node *node);
-	Node *get_parent_node(Node *node, Node *child);
+  Node *get_parent_node(Node *node, Node *child);
 
 public:
   // constructor
@@ -40,7 +40,7 @@ public:
   // typical BST functions
   Node *insert(const int data);
   Node *remove(const int data);
-	Node *in_order_successor(Node *node);
+  Node *in_order_successor(Node *node);
   Node *minimum(Node *node);
   Node *maximum(Node *node);
   void print();

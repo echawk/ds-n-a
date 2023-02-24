@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #define DEBUG_STATEMENTS 1
@@ -146,34 +146,33 @@ void swap_LinkedList(LinkedList_T *ll, int ind1, int ind2) {
     return;
   if (ind1 == ind2)
     return;
-	//swap the two indices so ind1 is always prior to ind2
-	if (ind2 < ind1) {	
-		ind1 = ind1 ^ ind2;
-		ind2 = ind1 ^ ind2;
-		ind1 = ind1 ^ ind2;
-	}
-	
+  // swap the two indices so ind1 is always prior to ind2
+  if (ind2 < ind1) {
+    ind1 = ind1 ^ ind2;
+    ind2 = ind1 ^ ind2;
+    ind1 = ind1 ^ ind2;
+  }
+
   Node_T *node1 = nodeAt_LinkedList(ll, ind1);
   Node_T *par1 = parentOf_LinkedList(ll, node1);
   Node_T *node2 = nodeAt_LinkedList(ll, ind2);
   Node_T *par2 = parentOf_LinkedList(ll, node2);
 
   // FIXME: DOESN'T WORK, idk why, makes list seemingly infinite...
-  if(node1 == NULL || node2 == NULL){
-		return;
-	}
+  if (node1 == NULL || node2 == NULL) {
+    return;
+  }
 
-	// we only have to check that node1 is the head of  the linked list
-	if(par1 != NULL){
-		par1->next = node2;
-	}
-	else{
-		ll->head = node2;
-	}
+  // we only have to check that node1 is the head of  the linked list
+  if (par1 != NULL) {
+    par1->next = node2;
+  } else {
+    ll->head = node2;
+  }
 
-	Node_T *temp = node2->next;
-	node2->next = node1->next;
-	node1->next = temp;
+  Node_T *temp = node2->next;
+  node2->next = node1->next;
+  node1->next = temp;
 }
 
 /* Roughly works? */
