@@ -158,27 +158,22 @@ void swap_LinkedList(LinkedList_T *ll, int ind1, int ind2) {
   Node_T *node2 = nodeAt_LinkedList(ll, ind2);
   Node_T *par2 = parentOf_LinkedList(ll, node2);
 
-  Node_T *par1_n = node1->next;
-  Node_T *par2_n = node2->next;
   // FIXME: DOESN'T WORK, idk why, makes list seemingly infinite...
-  // node1 is the head of the list.
-  if (par1 != NULL) {	//node1 is the head
-		Node_T *temp = node1->next;
-		node1->next = node2->next;
-		if (temp != par2) {	//if the nodes are not distance 2 away
-			node2->next = temp;	//point node2 at par2
-		}
-		else {
-			node2->next = par2;
-		}
-		par2_n = node1;
-		ll->head = node2;		//set the head to node2
-  } 
-	else {	//node1 is not the head
-    par2_n = node2->next;
-		node2->next = node1;
-		par1_n = node2;
-  }
+  if(node1 == NULL || node2 == NULL){
+		return;
+	}
+
+	// we only have to check that node1 is the head of  the linked list
+	if(par1 != NULL){
+		par1->next = node2;
+	}
+	else{
+		ll->head = node2;
+	}
+
+	Node_T *temp = node2->next;
+	node2->next = node1->next;
+	node1->next = temp;
 }
 
 /* Roughly works? */
