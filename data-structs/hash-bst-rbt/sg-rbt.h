@@ -5,10 +5,11 @@
 
 typedef enum {RED, BLACK} color_t;
 
+template <class T>
 class RBNode {
 private:
 	color_t color;
-  Node node;
+  Node<T> node;
 public:
   // constructors
   RBNode(int data);
@@ -29,9 +30,10 @@ public:
   static void print_in_order(Node *node);
 };
 
+template <class T>
 class RBT {
 private:
-	RBNode root;
+	RBNode<T> root;
 public:
 
 };
