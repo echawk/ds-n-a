@@ -5,6 +5,19 @@ Arr_T make_Arr(int size) {
   return (Arr_T){.size = size, .arr = calloc(size, sizeof(int))};
 }
 
+Arr_T combine_Arrs(Arr_T A, Arr_T B) {
+  Arr_T N = make_Arr(A.size + B.size);
+  N.arr = calloc(N.size, sizeof(int));
+  int i;
+  for (i = 0; i < A.size; i++) {
+    N.arr[i] = A.arr[i];
+  }
+  for (i = A.size; i < N.size; i++) {
+    N.arr[i] = B.arr[i - A.size];
+  }
+  return N;
+}
+
 void populate_Arr(Arr_T A) {
   int i = 0;
   for (i = 0; i < A.size; i++) {
