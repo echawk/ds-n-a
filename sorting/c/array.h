@@ -8,6 +8,7 @@ typedef struct Arr {
 } Arr_T;
 
 Arr_T make_Arr(int size);
+Arr_T combine_Arrs(Arr_T A, Arr_T B);
 void populate_Arr(Arr_T A);
 bool within_Arr(int val, Arr_T A);
 int largestIndIn_Arr(Arr_T A);
