@@ -133,9 +133,8 @@ Node *minValueNode(Node *node) { // Based on GeeksforGeeks
 
 Node *deleteNode(Node *root, int key) { // Based on GeeksforGeeks
   if (root == NULL) {
+      return root;
   }
-  return root;
-}
 
 // Find node to be deleted
 if (key < root->data) {
