@@ -133,39 +133,39 @@ Node *minValueNode(Node *node) { // Based on GeeksforGeeks
 
 Node *deleteNode(Node *root, int key) { // Based on GeeksforGeeks
   if (root == NULL) {
-      return root;
+    return root;
   }
 
-// Find node to be deleted
-if (key < root->data) {
-  root->leftChild = deleteNode(root->leftChild, key);
-} else if (key > root->data) {
-  root->rightChild = deleteNode(root->rightChild, key);
-} else { // Else, node to be deleted is head node
-  // node with only one child or no child
-  if (root->leftChild == NULL) {
-    Node *temp = root->rightChild;
-    free(root);
-    return temp;
-  } else if (root->rightChild == NULL) {
-    Node *temp = root->leftChild;
-    free(root);
-    return temp;
+  // Find node to be deleted
+  if (key < root->data) {
+    root->leftChild = deleteNode(root->leftChild, key);
+  } else if (key > root->data) {
+    root->rightChild = deleteNode(root->rightChild, key);
+  } else { // Else, node to be deleted is head node
+    // node with only one child or no child
+    if (root->leftChild == NULL) {
+      Node *temp = root->rightChild;
+      free(root);
+      return temp;
+    } else if (root->rightChild == NULL) {
+      Node *temp = root->leftChild;
+      free(root);
+      return temp;
+    }
+
+    // node with two children:
+    // Get the inorder successor
+    // (smallest in the right subtree)
+    Node *temp = minValueNode(root->rightChild);
+
+    // Copy the inorder
+    // successor's content to this node
+    root->data = temp->data;
+
+    // Delete the inorder successor
+    root->rightChild = deleteNode(root->rightChild, temp->data);
   }
-
-  // node with two children:
-  // Get the inorder successor
-  // (smallest in the right subtree)
-  Node *temp = minValueNode(root->rightChild);
-
-  // Copy the inorder
-  // successor's content to this node
-  root->data = temp->data;
-
-  // Delete the inorder successor
-  root->rightChild = deleteNode(root->rightChild, temp->data);
-}
-return root;
+  return root;
 }
 
 void printTree(Node *root, int level) { // From Stack Overflow

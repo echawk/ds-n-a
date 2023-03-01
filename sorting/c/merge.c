@@ -1,13 +1,13 @@
-#include <stdio.h> 
 #include "array.c"
+#include <stdio.h>
 
-void copyArray(Arr_T A, Arr_T copy, int end, int index){
-    for(int i = 0; i < end; i++){
-      copy.arr[i] = A.arr[index + i];
-    }
+void copyArray(Arr_T A, Arr_T copy, int end, int index) {
+  for (int i = 0; i < end; i++) {
+    copy.arr[i] = A.arr[index + i];
+  }
 }
 
-void merge(Arr_T A, int left, int middle, int right){
+void merge(Arr_T A, int left, int middle, int right) {
   int leftSize = middle - left + 1;
   int rightSize = right - middle;
   Arr_T leftA = make_Arr(leftSize);
@@ -15,30 +15,30 @@ void merge(Arr_T A, int left, int middle, int right){
   copyArray(A, leftA, leftSize, left);
   copyArray(A, rightA, rightSize, middle + 1);
   int i = 0, j = 0, k = left;
-  while (i < leftSize && j < rightSize){
-    if(leftA.arr[i] <= rightA.arr[j]){
+  while (i < leftSize && j < rightSize) {
+    if (leftA.arr[i] <= rightA.arr[j]) {
       A.arr[k] = leftA.arr[i];
       i++;
-    }else{
+    } else {
       A.arr[k] = rightA.arr[j];
       j++;
     }
     k++;
   }
-  while (i < leftSize){
+  while (i < leftSize) {
     A.arr[k] = leftA.arr[i];
     i++;
     k++;
   }
-  while (j < rightSize){
+  while (j < rightSize) {
     A.arr[k] = rightA.arr[j];
     j++;
     k++;
   }
 }
 
-void mergeSort(Arr_T A, int left, int right){
-  if (left < right){
+void mergeSort(Arr_T A, int left, int right) {
+  if (left < right) {
     int middle = left + (right - left) / 2;
     mergeSort(A, left, middle);
     mergeSort(A, middle + 1, right);
@@ -46,7 +46,7 @@ void mergeSort(Arr_T A, int left, int right){
   }
 }
 
-//void sort(Arr_T A) { mergeSort(A, 0, A.size - 1); }
+// void sort(Arr_T A) { mergeSort(A, 0, A.size - 1); }
 
 #ifndef ASLIB
 int main(int argc, char *argv[]) {
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
   populate_Arr(M);
   printf("Array before sorting: \n");
   print_Arr(M);
-  mergeSort(M, 0, M.size-1);
+  mergeSort(M, 0, M.size - 1);
   printf("Array after sorting: \n");
   print_Arr(M);
   return 0;

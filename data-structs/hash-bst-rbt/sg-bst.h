@@ -39,9 +39,9 @@ public:
   ~BST();
   // typical BST functions
   Node *insert(const int data);
-  void  remove(const int data);
+  void remove(const int data);
   Node *in_order_successor(Node *node);
-	void  transplant(Node *node1, Node *node2);
+  void transplant(Node *node1, Node *node2);
   Node *minimum(Node *node);
   Node *maximum(Node *node);
   void print();
