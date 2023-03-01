@@ -71,55 +71,6 @@ void rebalance(Node *root, Node *current) {
   }
 }
 
-/*int delete(Node* head, int delete) {
-    Node* current = head;
-    Node* deleteHead;
-    if (head->data == delete) { //Accounts for head node
-        deleteHead = (Node*)malloc(sizeof(Node));
-        memcpy(&deleteHead, &head, sizeof(Node));
-        //deleteHead->data = head->data;
-        //deleteHead->leftChild = head->leftChild;
-        //deleteHead->rightChild = head->rightChild;
-        printf("%p\n", head);
-        printf("%p\n", deleteHead);
-        head = NULL;
-    } else {
-        Node* parent = head;
-        while (current->data != delete) { //Gets parent node of delete
-            if (current != NULL) {
-                if (current->data > delete) { //Go to left child
-                    parent = current;
-                    current = current->leftChild;
-                } else { //Go to right child
-                    parent = current;
-                    current = current->rightChild;
-                }
-
-                if(current == NULL) {
-                    return -1;
-                }
-            }
-        }
-        current = parent;
-
-        if (current->leftChild != NULL && current->leftChild->data == delete) {
-//Makes delete sub-tree so that its children can be rebalanced deleteHead =
-current->leftChild; current->leftChild = NULL; } else { deleteHead =
-current->rightChild; current->rightChild = NULL;
-        }
-    }
-
-    if (deleteHead->leftChild != NULL) { //Rebalances tree
-        rebalance(head, deleteHead->leftChild);
-    }
-    if (deleteHead->rightChild != NULL) {
-        rebalance(head, deleteHead->rightChild);
-    }
-
-    free(deleteHead);
-    return 0;
-}*/
-
 // Returns Minimum Value Node
 Node *minValueNode(Node *node) { // Based on GeeksforGeeks
   Node *current = node;
