@@ -1,55 +1,37 @@
+#include <iostream>
+
 #include <sg-rbt.h>
 
 // constructors
+
 RBNode::RBNode(int data){
-	this->node.set_data(data);
+	this->set_data(data);
 	this->color = RED;
 }
 
 RBNode::RBNode(int data, color_t color){
-	this->node.set_data(data);
+	this->set_data(data);
 	this->color = color;
 }
 
-// destructor
-RBNode::~RBNode(){
-	
-}
-
-// accessors
-int RBNode::get_data(void){
-
-}
+// accessor
 
 color_t RBNode::get_color(void){
-
+	return this->color;
 }
 
-Node *RBNode::get_left_link(void){
-
-}
-
-Node *RBNode::get_right_link(void){
-
-}
-
-// mutators
-void RBNode::set_data(int data){
-
-}
+// mutator
 
 void RBNode::set_color(color_t color){
-
+	this->color = color;
 }
 
-void RBNode::set_left_link(Node *left){
+// typical RBT functions
 
+RBT::RBT(){
+	root = nullptr;
 }
-
-void RBNode::set_right_link(Node *right){
-
-}
-
-void RBNode::print_in_order(Node *node){
-
+	
+RBT::~RBT(){
+	free(root);
 }
