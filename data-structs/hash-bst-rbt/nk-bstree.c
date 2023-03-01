@@ -63,7 +63,7 @@ Node *search(Node *current, int find) {
   return current;
 }
 
-void rebalance(Node *root, Node *current) {
+void rebalance(Node *root, Node *current) {	//not necessary, BST doesn't need to balance
   if (current != NULL) {
     insert(root, current->data);
     rebalance(root, current->leftChild);
@@ -131,6 +131,15 @@ void printTree(Node *root, int level) { // From Stack Overflow
   printTree(root->rightChild, level + 1);
 }
 
+void temp_print_in_order(Node *node){
+	if(node == NULL){
+		return;
+	}
+	temp_print_in_order(node->leftChild);
+	printf("%d ", node->data);
+	temp_print_in_order(node->rightChild);
+}
+
 int main() {
   Node *root = insert(NULL, 14);
   // printf("%d\n", root->data);
@@ -143,10 +152,14 @@ int main() {
   // printf("%d\n", root->leftChild->data);
   // printf("%d\n", root->rightChild->data);
   printTree(root, 0);
+	// temp_print_in_order(root);
   deleteNode(root, 21);
-  printf("Deleted Node w/ 21\n");
+  printf("\nDeleted Node w/ 21\n");
   printTree(root, 0);
+	// temp_print_in_order(root);
   deleteNode(root, 14);
-  printf("Deleted Head Node\n");
+  printf("\nDeleted Head Node\n");
   printTree(root, 0);
+	// temp_print_in_order(root);
+	printf("\n");
 }
