@@ -74,14 +74,16 @@ void print_Arr(Arr_T A) {
   printf("%d]\n", A.arr[i]);
 }
 
-void reverse_Arr(int start, int end, Arr_T A){
+void reverse_Arr(int start, int end, Arr_T A) {
   int temp;
-  if (start >= end){
+  if (start >= end) {
     return;
   }
-swap(start, end, A);
-reverse_Arr(start + 1, end - 1, A);
+  swap(start, end, A);
+  reverse_Arr(start + 1, end - 1, A);
 }
+
+void set_Value(int value, int ind, Arr_T A) { A.arr[ind] = value; }
 
 #ifndef VISUALIZE
 void swap(int ind1, int ind2, Arr_T A) {
@@ -92,3 +94,14 @@ void swap(int ind1, int ind2, Arr_T A) {
   }
 }
 #endif
+
+/*leaving main for testing if needed
+int main() {
+  Arr_T M = make_Arr(100);
+  populate_Arr(M);
+  printf("Array before modification: \n");
+  print_Arr(M);
+  printf("Array after modification: \n");
+  print_Arr(M);
+  return 0;
+}*/
