@@ -3,16 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void push(Node** head, int newData) { // Adds to front
-  Node* newNode = createNode(newData, *head);
+void push(Node **head, int newData) { // Adds to front
+  Node *newNode = createNode(newData, *head);
   *head = newNode;
 }
 
-int pop(Node** headPointer) { // Removes from front
+int pop(Node **headPointer) { // Removes from front
   if (*headPointer == NULL) {
     return -1;
   } else {
-    Node* head = *headPointer;
+    Node *head = *headPointer;
     int data = head->data;
     (*headPointer) = (*headPointer)->next;
     free(head);
@@ -20,7 +20,7 @@ int pop(Node** headPointer) { // Removes from front
   }
 }
 
-int peek(Node* head) { // Removes from front
+int peek(Node *head) { // Removes from front
   if (head == NULL) {
     return -1;
   } else {
@@ -29,7 +29,7 @@ int peek(Node* head) { // Removes from front
 }
 
 int main() {
-  Node* head = createNode(1, NULL);
+  Node *head = createNode(1, NULL);
   push(&head, 2);
   push(&head, 3);
   push(&head, 4);
