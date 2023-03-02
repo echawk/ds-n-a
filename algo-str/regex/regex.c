@@ -42,34 +42,108 @@ at the current point in the string.
   printf("TODO");                                                              \
   exit(1);
 
+/* Total num of characters that our regex engine supports. */
+#define ASCII_SIZE 128
+
+typedef struct StateVec {
+  int *tVec;
+  int size;
+} StateVec_T;
+
+StateVec_T make_StateVec() {
+  StateVec_T sv =
+      (StateVec_T){.tVec = calloc(ASCII_SIZE, sizeof(int)), .size = ASCII_SIZE};
+  int i;
+  for (i = 0; i < sv.size; i++) {
+    sv.tVec[i] = 0;
+  }
+  return sv;
+}
+
+void print_StateVec(StateVec_T sv) {
+  int i;
+  for (i = 0; i < sv.size; i++) {
+    if (isalnum(i)) {
+      printf("%c ", i);
+    } else {
+      printf("  ");
+    }
+  }
+  printf("\n");
+  for (i = 0; i < sv.size; i++) {
+    printf("%d ", sv.tVec[i]);
+  }
+  printf("\n");
+}
+
 typedef struct Regex {
   char *strRep;
+  StateVec_T *svMatr;
 } Regex_T;
 
 bool Regex_match_p(Regex_T re, char *str) { TODO; }
 
-Regex_T Str_to_Regex(char *str) { TODO; }
+Regex_T make_Regex(char *str) {
+  StateVec_T haltSV = make_StateVec();
+
+  StateVec_T initSV = make_StateVec();
+
+  /*
+    FIXME: This is hacky, and does not work all of the time.
+    However, since this regex engine is 'simple' we can assume,
+    that we won't have more than strlen(str)+2 states. This is
+    not *exactly* true, but should suffice to prove that this works.
+    It'll be fixed later.
+   */
+
+  StateVec_T *StateVecMatr =
+      (StateVec_T *)calloc(strlen(str) + 2, sizeof(StateVec_T));
+  StateVecMatr[0] = haltSV;
+  StateVecMatr[1] = initSV;
+  int curr_state = 1;
+  int i;
+  for (i = 2; i < strlen(str) + 2; i++) {
+    StateVecMatr[i] = make_StateVec();
+  }
+
+  i = 0;
+  do {
+    char curr_c = str[i];
+    char peek_c = str[i + 1];
+    if (isalnum(curr_c)) {
+      StateVecMatr[curr_state].tVec[curr_c] = curr_state + 1;
+    }
+
+    /* switch (curr_c) { */
+    /* case 'b': */
+    /*   printf("char\n"); */
+    /*   break; */
+    /* case '0': */
+    /*   printf("num\n"); */
+    /*   break; */
+    /* } */
+    /* printf("%c, %d\n", curr_c, curr_c); */
+
+    curr_state++;
+    i++;
+  } while (i < strlen(str));
+
+  for (i = 0; i < strlen(str); i++) {
+    print_StateVec(StateVecMatr[i]);
+  }
+
+  TODO;
+}
 
 int main() {
 
-  Regex_T re = (Regex_T){.strRep = "b0b"};
+  /* StateVec_T sv = make_StateVec(); */
+  /* print_StateVec(sv); */
 
   char *str = "aAzZ09 ";
 
-  for (int i = 0; i < strlen(str); i++) {
-    if (isalnum(str[i])) {
-      printf("is alpha numeric\n");
-    }
-    switch (str[i]) {
-    case 'b':
-      printf("char\n");
-      break;
-    case '0':
-      printf("num\n");
-      break;
-    }
-    printf("%c, %d\n", str[i], str[i]);
-  }
+  char *restr = "b0b";
+  Regex_T re = make_Regex(str);
 
   Regex_match_p(re, "bob");
   Regex_match_p(re, "b0b");
