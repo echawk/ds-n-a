@@ -47,3 +47,33 @@ class Arr_T:
             for i in range(self.size):
                 j = i + random.randint((random.randint(max, max) / self.size - i)) + 1
                 self.swap(i, j)
+
+    #Does not work correctly yet
+    def combine_Arrs(self, B):
+        N = self.Arr_T()
+        N = self.make_Arr(self.size + B.size)
+        for i in range(self.size):
+            N.arr[i] = self.arr[i]
+        for j in range(self.size, N.size):
+            N.arr[j] = B.arr[j - self.size]
+
+
+    def set_Value(self, value: int, ind: int):
+        self.arr[ind] = value
+
+
+
+'''
+if __name__ == "__main__":
+    array = Arr_T()
+    array.make_Arr(50)
+    array2 = Arr_T()
+    array2.make_Arr(50)
+    array.populate_Arr()
+    array2.populate_Arr()
+    print("Array before combining: ")
+    array.print_Arr()
+    array.combine_Arrs(array2)
+    print("Array after combining: ")
+    array.print_Arr()
+    '''
