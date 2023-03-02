@@ -64,14 +64,18 @@ void print_StateVec(StateVec_T sv) {
   int i;
   for (i = 0; i < sv.size; i++) {
     if (isalnum(i)) {
-      printf("%c ", i);
+      printf("%c", i);
     } else {
-      printf("  ");
+      printf(" ");
     }
   }
   printf("\n");
   for (i = 0; i < sv.size; i++) {
-    printf("%d ", sv.tVec[i]);
+    if (sv.tVec[i] != 0) {
+      printf("%d", sv.tVec[i]);
+    } else {
+      printf(" ");
+    }
   }
   printf("\n");
 }
@@ -110,19 +114,51 @@ Regex_T make_Regex(char *str) {
   do {
     char curr_c = str[i];
     char peek_c = str[i + 1];
+
+    int j; // general iterator for the switch statements.
+
     if (isalnum(curr_c)) {
       StateVecMatr[curr_state].tVec[curr_c] = curr_state + 1;
-    }
+    } else {
+      switch (curr_c) {
+        /*
+          If we encounter a range, we are going to treat the entire
+          range as a single character, so there will only be one state.
+         */
+      case '[':
+        char range_start_c = peek_c;
+        i += 2;
+        curr_c = str[i];
+        peek_c = str[i + 1];
+        /*
+          Sanity check our environment.
+         */
+        if (curr_c != '-' || !isalnum(peek_c)) {
+          // TODO: add nice error msg
+          exit(1);
+        }
+        char range_end_c = peek_c;
+        i++;
+        peek_c = str[i + 1];
+        if (peek_c != ']') {
+          printf("ERR: Missing ']'\n");
+        }
+        /*
+          Fill in the range with the next state.
+         */
+        for (j = range_start_c; j <= range_end_c; j++) {
+          StateVecMatr[curr_state].tVec[j] = curr_state + 1;
+        }
+        break;
+      case '.':
+        for (j = 0; j < StateVecMatr[curr_state].size; j++) {
+          StateVecMatr[curr_state].tVec[j] = curr_state + 1;
+        }
+        break;
+      }
 
-    /* switch (curr_c) { */
-    /* case 'b': */
-    /*   printf("char\n"); */
-    /*   break; */
-    /* case '0': */
-    /*   printf("num\n"); */
-    /*   break; */
-    /* } */
-    /* printf("%c, %d\n", curr_c, curr_c); */
+      // printf("%c, %d\n", curr_c, curr_c);
+    }
 
     curr_state++;
     i++;
@@ -140,7 +176,8 @@ int main() {
   /* StateVec_T sv = make_StateVec(); */
   /* print_StateVec(sv); */
 
-  char *str = "aAzZ09 ";
+  // char *str = "aAzZ09 ";
+  char *str = ".[0-9]";
 
   char *restr = "b0b";
   Regex_T re = make_Regex(str);
