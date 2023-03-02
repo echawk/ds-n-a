@@ -74,6 +74,15 @@ void print_Arr(Arr_T A) {
   printf("%d]\n", A.arr[i]);
 }
 
+void reverse_Arr(int start, int end, Arr_T A){
+  int temp;
+  if (start >= end){
+    return;
+  }
+swap(start, end, A);
+reverse_Arr(start + 1, end - 1, A);
+}
+
 #ifndef VISUALIZE
 void swap(int ind1, int ind2, Arr_T A) {
   if (A.arr[ind1] != A.arr[ind2]) {
