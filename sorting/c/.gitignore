@@ -7,5 +7,7 @@ bucket
 shell
 cocktail
 heap
+counting
+merge
 *.o
 vis-*
