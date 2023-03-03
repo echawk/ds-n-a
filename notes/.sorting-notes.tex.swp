@@ -1,0 +1,25 @@
+\documentclass[11pt]{article}
+	\title{\textbf{Sorting Algorithm Notes}}
+	\author{Christian Garcia}
+	\date{}
+	
+	\addtolength{\topmargin}{-3cm}
+    \addtolength{\textheight}{3cm}
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section{Why are sorting algorithms important?}
+Some useful explanations from \emph{Introduction to Algorithms} on how sorting algorithims are relevant and useful.\footnote{Thomas H. Cormen et al., Introduction to Algorithms (The MIT Press, 2022), 113.}
+
+\begin{itemize}
+\item{Inevitabily, data will need sorted for some reason or another. There are numerous sets of data that need sorted in practical applications. Some examples are: students at a university being sorted by graduation year, banks sorting checks by check number, etc.}
+\item{Sorting algorithms are used as a key subroutine in many programs. Assume you are editing a screen with multiple layers of pixels. Using a sorting algorithm is vital to edit the pixels from the lowest layer before editing pixels from the highest layer.}
+\item{Sorting algorithms employ unique solutions to sort data which can provide different use cases for each algorithm depending on the data. Some algorithms use a divide and conquer method whereas others may use simple comparisons and swaps to sort the data.}
+\item{Sorting algorithms can be used for proving mathematical issues such as upper and lower bounds. With these bounds established, we can conclude that the sorting algorithms are asymptotically optimal.}
+\item{Sorting algorithms can highlight many issues with the engineering of computing devices. Sorting algorithms are meant to be quick and efficient. The factors that are important to stress here are: keys and satellite data, memory hierarchy (i.e. caches and virtual memory), and the software environment.}
+\end{itemize}
+
+
+\end{document}
