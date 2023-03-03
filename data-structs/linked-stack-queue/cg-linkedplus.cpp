@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+
 using namespace std;
 
 class Node {
@@ -28,6 +29,8 @@ public:
   void addToFront(int);
   Node *findNode(int);
   void deleteNode(int, Node **);
+  void removeFirst(Node **);
+  void removeLast(Node **);
   int listSize(Node *);
   void printList(Node *);
 };
@@ -93,6 +96,30 @@ void LinkedList::deleteNode(int s, Node **n) {
   }
 }
 
+void LinkedList::removeFirst(Node **n){
+  Node *curr = *n;
+  Node *newHead = curr->next;
+  free(curr);
+  head = newHead;
+}
+
+void LinkedList::removeLast(Node **n){
+  Node *curr = *n;
+  Node *prev = NULL;
+  if (n != NULL) {
+    while (curr->next != NULL) {
+      prev = curr;
+      curr = curr->next;
+    }
+    if (curr->next == NULL) {
+      prev->next = NULL;
+    }
+    free(curr);
+  } else {
+    printf("The list is empty!\n");
+  }
+}
+
 int LinkedList::listSize(Node *n) {
   Node *curr;
   int count = 0;
@@ -109,6 +136,7 @@ void LinkedList::printList(Node *n) {
   }
 }
 
+/*
 int main() {
   srand((unsigned)time(NULL));
   LinkedList list = LinkedList();
@@ -123,10 +151,12 @@ int main() {
   list.printList(list.head);
   printf("\n");
   printf("\tList size: %d", list.listSize(list.head));
-  list.deleteNode(11, &list.head);
+  //list.deleteNode(11, &list.head);
+  //list.removeFirst(&list.head);
+  list.removeLast(&list.head);
   printf("\nNew list: ");
   list.printList(list.head);
   printf("\n");
   printf("\tList size: %d", list.listSize(list.head));
   return 0;
-}
+}*/
