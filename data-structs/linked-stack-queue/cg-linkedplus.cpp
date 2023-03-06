@@ -96,14 +96,14 @@ void LinkedList::deleteNode(int s, Node **n) {
   }
 }
 
-void LinkedList::removeFirst(Node **n){
+void LinkedList::removeFirst(Node **n) {
   Node *curr = *n;
   Node *newHead = curr->next;
   free(curr);
   head = newHead;
 }
 
-void LinkedList::removeLast(Node **n){
+void LinkedList::removeLast(Node **n) {
   Node *curr = *n;
   Node *prev = NULL;
   if (n != NULL) {
