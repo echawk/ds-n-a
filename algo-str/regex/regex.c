@@ -24,7 +24,17 @@ Compiles to the following table:
   1| SH| SH| SH| SA| SH|
   ...
 
+In this table, SH is blank:
 
+     S0  S1  S3  SA  SH
+   +---+---+---+---+---+
+  a|   |   |   | SA|   |
+  b| S1|   | SA| SA|   |
+  c|   |   |   | SA|   |
+  ...
+  0|   | S3|   | SA|   |
+  1|   |   |   | SA|   |
+  ...
 The S* columns are the state transition vectors,
 if the FSM is state N,
   - then transition to the new state denoted by S_N[c], where c is the character
@@ -115,6 +125,8 @@ Regex_T make_Regex(char *str) {
     char curr_c = str[i];
     char peek_c = str[i + 1];
 
+    char range_start_c;
+
     int j; // general iterator for the switch statements.
 
     if (isalnum(curr_c)) {
@@ -126,7 +138,7 @@ Regex_T make_Regex(char *str) {
           range as a single character, so there will only be one state.
          */
       case '[':
-        char range_start_c = peek_c;
+        range_start_c = peek_c;
         i += 2;
         curr_c = str[i];
         peek_c = str[i + 1];
@@ -160,6 +172,33 @@ Regex_T make_Regex(char *str) {
       // printf("%c, %d\n", curr_c, curr_c);
     }
 
+    switch (peek_c) {
+    case '+':
+      /* 1 or inf many matches. */
+      /*
+        Will flow down into the '*' case as well, since all we have to
+        do for the plus state is to just duplicate the state and append an
+        asterisk state.
+      */
+      TODO;
+    case '*':
+      /* 0 or inf many matches. */
+      /* FIXME: This doesnt' work with ranges yet. */
+      for (j = 0; j < StateVecMatr[curr_state].size; j++) {
+        if (StateVecMatr[curr_state].tVec[j] != 0) {
+          StateVecMatr[curr_state].tVec[j] = curr_state;
+        } else {
+          StateVecMatr[curr_state].tVec[j] = curr_state + 1;
+        }
+      }
+      break;
+    case '?':
+      TODO;
+      break;
+    default:
+      break;
+    }
+
     curr_state++;
     i++;
   } while (i < strlen(str));
@@ -171,15 +210,20 @@ Regex_T make_Regex(char *str) {
   TODO;
 }
 
-int main() {
+int main(int argc, char **argv) {
+
+  char *str = ".[A-Z]a*";
+
+  if (argc > 1) {
+    str = argv[1];
+  }
 
   /* StateVec_T sv = make_StateVec(); */
   /* print_StateVec(sv); */
 
   // char *str = "aAzZ09 ";
-  char *str = ".[0-9]";
+  /* char *str = ".[0-9]*"; */
 
-  char *restr = "b0b";
   Regex_T re = make_Regex(str);
 
   Regex_match_p(re, "bob");
