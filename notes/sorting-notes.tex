@@ -110,19 +110,47 @@ Some useful explanations from \emph{Introduction to Algorithms} on how sorting a
 \begin{itemize}
 \addtolength{\itemindent}{0.80cm}
 \itemsep0em 
-\item{Create a separate array for counting the number of times a value occurs in the array of data}
-\item{}
+\item{Create a separate array for counting the number of times a value occurs in the array of data (Ex. range from 0-9)}
+\item{Increment the value for the corresponding index depending how many times the number appears.}
+\item{Make the count of the array the sum of the previous counts. (Ex. $ a[i] = a[i] + a[i-1]$)}
+\item{Sort the count array}
+\item{Put the input array in order using the count array. Increase the count each time by 1.}
+\item{After placing an element at the correct position, decrease the count by 1.}
 \end{itemize}
 \item{When should you use this sorting algorithm?}
 \begin{itemize}
 \addtolength{\itemindent}{0.80cm}
 \itemsep0em 
-\item{}
+\item{On datasets that the input data is not greater than the number of objects being sorted. }
 \end{itemize}
 \end{itemize}
 
-\item{Counting}
 \item{Gnome}
+\footnote{“Gnome Sort,” GeeksforGeeks (GeeksforGeeks, February 1, 2023), https://www.geeksforgeeks.org/gnome-sort-a-stupid-one/.}
+\begin{itemize}
+\addtolength{\itemindent}{0.80cm}
+\itemsep0em 
+\item{How does this algorithm work?}
+\begin{itemize}
+\addtolength{\itemindent}{0.80cm}
+\itemsep0em 
+\item{Start at the beginning of the array. Compare $a[i]$ and $a[i+1]$ to see which is greater.}
+\begin{itemize}
+\addtolength{\itemindent}{0.80cm}
+\itemsep0em 
+\item{If $a[i] >= a[i+1]$ then move to the next index}
+\item{If $a[i] < a[i+1]$ then swap these elements and move to the previous index} 
+\end{itemize}
+\item{Repeat this step until the index reaches the end of the array. At this point, the array is sorted.}
+\end{itemize}
+\item{When should you use this sorting algorithm?}
+\begin{itemize}
+\addtolength{\itemindent}{0.80cm}
+\itemsep0em 
+\item{On basically any dataset. May not be the fastest sort to use however.}
+\end{itemize}
+\end{itemize}
+
 \item{Heap}
 \item{Insertion}
 \item{Merge}
