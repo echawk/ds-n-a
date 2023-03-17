@@ -22,7 +22,7 @@ Node *insert(Node *current, int insert) {
     current = tempNode;
     return current;
   } else {
-    while (1) {
+    while (true) {
       parent = current;
 
       if (insert == current->data) { // Node is already in tree
