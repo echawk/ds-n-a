@@ -7,7 +7,7 @@ CFLAGS="-std=c99 -Wall -pedantic -g"
 # algorithms, and one for the SDL2 based visualizer.
 "${CC:-cc}" $CFLAGS -c array.c -o array.o
 "${CC:-cc}" $CFLAGS -DVISUALIZE -c array.c -o array-viz.o
-for alg in bucket.c cocktail.c comb.c gnome.c heap.c insertion.c quick.c shell.c radix.c; do
+for alg in bucket.c cocktail.c comb.c counting.c gnome.c heap.c insertion.c quick.c shell.c radix.c; do
     "${CC:-cc}" $CFLAGS -DASLIB -c "${alg%%.c}.o" "$alg"
     "${CC:-cc}" $CFLAGS -o "${alg%%.c}" array.o "$alg"
     "${CC:-cc}" $CFLAGS -lSDL2 -o "vis-${alg%%.c}" "${alg%%.c}.o" array-viz.o visualizer.c
