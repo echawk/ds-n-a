@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Compile with the C99 standard, warnings enabled, and with GDB support.
+CFLAGS="-std=c99 -Wall -pedantic -g"
+
+# Compile all queues and stacks since linked list
+# does not contain a main
+for ds in cg-queue.c cg-stack.c eh-queue.c eh-stack.c nk-queue.c nk-stack.c sg-queue.c sg-stack.c; do
+    "${CC:-cc}" $CFLAGS -o "${ds%%.c}" "$ds"
+done
+
+# Compile with the latest version of c++, with warnings enables,
+# and GDB support.
+CPPFLAGS="-std=c++23 -Wall -Wpedantic"
+
+for dspp in cg-queueplus.cpp cg-stackplus.cpp; do
+	"${CC:-cpp}" $CPPFLAGS -o "${dspp%%.cpp}" "$dspp"
+done
