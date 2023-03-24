@@ -26,12 +26,11 @@ public:
 
 class BST {
 private:
-  Node *root;
+  Node *root = nullptr;
 
   Node *insert_at_node(const int data, Node *node);
   Node *search_at_node(const int data, Node *node);
   Node *get_parent_node(Node *node, Node *child);
-
 public:
   // constructor
   BST();

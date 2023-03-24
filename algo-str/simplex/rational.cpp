@@ -22,7 +22,7 @@ int gcd(int x, int y) {
     }
   }
 
-  return result; // return gcd of a nd b
+  return result; // return gcd of a and b
 }
 
 void ratio_reduce(rational_t *ratio) {

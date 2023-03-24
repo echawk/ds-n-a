@@ -34,5 +34,6 @@ int main() {
   }
   printf("Here is the new stack:\n");
   printList(top);
+  printf("\n");
   return 0;
 }

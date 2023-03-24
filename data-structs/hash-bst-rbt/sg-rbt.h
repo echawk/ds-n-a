@@ -9,6 +9,9 @@ class RBNode : Node {
 private:
   color_t color;
 
+	RBNode *left;
+	RBNode *right;
+	RBNode *parent;
 public:
   // constructors
   RBNode(int data);
@@ -17,14 +20,24 @@ public:
   ~RBNode();
   // accessor
   color_t get_color(void);
+	int get_data(void);
+  RBNode *get_left_link(void);
+  RBNode *get_right_link(void);
+  RBNode *get_parent_link(void);
   // mutator
   void set_color(color_t color);
+	void set_data(int data);
+  void set_left_link(RBNode *left);
+  void set_right_link(RBNode *right);
+  void set_parent_link(RBNode *parent);
 };
 
 class RBT : BST {
 private:
-  RBNode *root;
-
+	RBNode * const SENTINEL = nullptr;
+  RBNode *root = SENTINEL;
+	RBNode *insert_at_node(const int data, RBNode *node);
+  RBNode *search_at_node(const int data, RBNode *node);
 public:
   RBT();
 
