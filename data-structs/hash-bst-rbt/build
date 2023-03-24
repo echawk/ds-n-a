@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Compile with C99 standard, warnings enabled, with GDB support.
+CFLAGS="-std=c99 -Wall -pedantic -g"
+
+for ds in hashtable-c.c nk-bstree.c nk-rbtree.c; do
+	"${CC:-cc}" $CFLAGS -o "${ds%%.c}" "$ds"
+done
+
+# Compile with C++23, warnings enabled, with GDB support.
+CPPFLAGS="-std=c++23 -Wall -Wpedantic"
+
+for dspp in hashtable.cpp sg-bst.cpp sg-rbt.cpp; do
+	"${CC:-g++}" $CPPFLAGS -o "${dspp%%.cpp}" "$dspp"
+done
