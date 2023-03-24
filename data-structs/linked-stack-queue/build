@@ -14,5 +14,5 @@ done
 CPPFLAGS="-std=c++23 -Wall -Wpedantic"
 
 for dspp in cg-queueplus.cpp cg-stackplus.cpp; do
-	"${CC:-cpp}" $CPPFLAGS -o "${dspp%%.cpp}" "$dspp"
+	"${CC:-g++}" $CPPFLAGS -o "${dspp%%.cpp}" "$dspp"
 done
