@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Compile with C99 standard, warnings enabled, and GDB support.
+CFLAGS="-std=c99 -Wall -pedantic -g"
+
+for r in regex.c; do
+	"${CC:-cc}" $CFLAGS -o "${r%%.c}" "$r"
+done

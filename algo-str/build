@@ -1,0 +1,7 @@
+#!/bin/sh
+
+for d in */; do
+	cd "$d"
+	./build
+	cd "$OLDPWD"
+done

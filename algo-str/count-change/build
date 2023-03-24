@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Compile using C99, warnings enabled, with GDB support.
+CFLAGS="-std=c99 -Wall -pedantic -g"
+
+for g in nk-countchange.c; do
+	"${CC:-cc}" $CFLAGS -o "${g%%.c}" "$g"
+done
