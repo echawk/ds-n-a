@@ -39,3 +39,19 @@ int stack_peek(stack_t *stack) {
 }
 
 bool stack_is_empty(stack_t *stack) { return (stack->data == NULL); }
+
+void stack_print(stack_t *stack){
+	if(stack == NULL || stack_is_empty(stack)){
+		printf("Empty!\n");
+	}
+	node_t* ptr = stack->data;
+	while(ptr != NULL){
+		
+
+
+	}
+}
+
+int main(void){
+	printf("Current stack: ");
+}
