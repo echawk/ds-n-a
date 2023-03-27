@@ -133,22 +133,3 @@ void node_print(node_t *head) {
 
   return;
 }
-
-int main(void) {
-  node_t *head = calloc(1, sizeof(node_t));
-
-  node_add_to_front(&head, 2);
-  node_add_to_front(&head, 2);
-  node_add_to_front(&head, 3);
-  node_add_to_front(&head, 2);
-  node_add_to_front(&head, 4);
-  node_add_to_front(&head, 0);
-  node_add_to_end(&head, 0);
-  node_print(head);
-  node_delete_at_place(&head, 1);
-  node_print(head);
-
-  free(head);
-
-  exit(EXIT_SUCCESS);
-}
