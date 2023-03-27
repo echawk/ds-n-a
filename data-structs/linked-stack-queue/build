@@ -1,17 +1,21 @@
 #!/bin/sh
 
 # Compile with the C99 standard, warnings enabled, and with GDB support.
-CFLAGS="-std=c99 -Wall -pedantic -g"
+CFLAGS="-std=c99 -Wall -pedantic -Wextra -g"
 
 # Compile all queues and stacks since linked list
 # does not contain a main
-for ds in cg-queue.c cg-stack.c eh-queue.c eh-stack.c nk-queue.c nk-stack.c sg-queue.c sg-stack.c; do
+for ds in cg-queue.c cg-stack.c eh-queue.c eh-stack.c nk-queue.c nk-stack.c; do
     "${CC:-cc}" $CFLAGS -o "${ds%%.c}" "$ds"
 done
 
+# The correct way to compile when using header files / not including the source code
+"${CC:-cc}" $CFLAGS sg-queue.c sg-linkedlist.c -o sg-queue
+"${CC:-cc}" $CFLAGS sg-stack.c sg-linkedlist.c -o sg-stack
+
 # Compile with the latest version of c++, with warnings enables,
 # and GDB support.
-CPPFLAGS="-std=c++23 -Wall -Wpedantic"
+CPPFLAGS="-std=c++23 -Wall -Wpedantic -Wextra"
 
 for dspp in cg-queueplus.cpp cg-stackplus.cpp; do
 	"${CC:-g++}" $CPPFLAGS -o "${dspp%%.cpp}" "$dspp"
