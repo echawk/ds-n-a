@@ -3,7 +3,7 @@
 # Implementing Red-Black Tree in Python
 
 # From https://www.programiz.com/dsa/red-black-tree
-# Then put through Python Black
+# Adapted and then put through Python Black
 
 
 import sys
@@ -29,28 +29,28 @@ class RedBlackTree:
 
     # Preorder
     def pre_order_helper(self, node):
-        if node != TNULL:
+        if node != self.TNULL:
             sys.stdout.write(node.item + " ")
             self.pre_order_helper(node.left)
             self.pre_order_helper(node.right)
 
     # Inorder
     def in_order_helper(self, node):
-        if node != TNULL:
+        if node != self.TNULL:
             self.in_order_helper(node.left)
             sys.stdout.write(node.item + " ")
             self.in_order_helper(node.right)
 
     # Postorder
     def post_order_helper(self, node):
-        if node != TNULL:
+        if node != self.TNULL:
             self.post_order_helper(node.left)
             self.post_order_helper(node.right)
             sys.stdout.write(node.item + " ")
 
     # Search the tree
     def search_tree_helper(self, node, key):
-        if node == TNULL or key == node.item:
+        if node == self.TNULL or key == node.item:
             return node
 
         if key < node.item:
@@ -109,7 +109,7 @@ class RedBlackTree:
         x.color = 0
 
     def __rb_transplant(self, u, v):
-        if u.parent == None:
+        if u.parent is None:
             self.root = v
         elif u == u.parent.left:
             u.parent.left = v
@@ -220,7 +220,7 @@ class RedBlackTree:
     def postorder(self):
         self.post_order_helper(self.root)
 
-    def searchTree(self, k):
+    def search_tree(self, k):
         return self.search_tree_helper(self.root, k)
 
     def minimum(self, node):
@@ -261,7 +261,7 @@ class RedBlackTree:
             y.left.parent = x
 
         y.parent = x.parent
-        if x.parent == None:
+        if x.parent is None:
             self.root = y
         elif x == x.parent.left:
             x.parent.left = y
@@ -277,7 +277,7 @@ class RedBlackTree:
             y.right.parent = x
 
         y.parent = x.parent
-        if x.parent == None:
+        if x.parent is None:
             self.root = y
         elif x == x.parent.right:
             x.parent.right = y
@@ -305,18 +305,18 @@ class RedBlackTree:
                 x = x.right
 
         node.parent = y
-        if y == None:
+        if y is None:
             self.root = node
         elif node.item < y.item:
             y.left = node
         else:
             y.right = node
 
-        if node.parent == None:
+        if node.parent is None:
             node.color = 0
             return
 
-        if node.parent.parent == None:
+        if node.parent.parent is None:
             return
 
         self.fix_insert(node)
