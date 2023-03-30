@@ -21,7 +21,7 @@ class LinkedList(ABC):
     def pop(self):
         pass
 
-    def length(self) -> int:
+    def __len__(self) -> int:
         current_node = self.head
         n = 0
 
@@ -31,7 +31,7 @@ class LinkedList(ABC):
 
         return n
 
-    def contains(self, data) -> bool:
+    def __contains__(self, data) -> bool:
         current_node = self.head
 
         while current_node is not None:
@@ -84,6 +84,93 @@ class Stack(LinkedList):
         return data
 
 
+class PriorityNode:
+    def __init__(self, data, link):
+        self.data = data
+        self.link = link
+
+
+class PriorityQueue:
+    def __init__(self, head_data):
+        self.head = []
+        self.head.append(PriorityNode(head_data, None))
+
+    def put(self, data, priority: int):
+        # a node already exists with that priority
+        if 0 <= priority < len(self.head):
+            self.head[priority] = PriorityNode(data, self.head[priority])
+        # a node does not exist with that priority and the priority increases by 1
+        elif priority == len(self.head):
+            self.head.append(PriorityNode(data, None))
+        else:
+            # this is due to the constraints of the list in Python
+            raise Exception("Priority cannot be raised by more than 1")
+
+    def pop(self):
+        for priority, head in enumerate(self.head):
+            if head is not None:
+                if head.link is None:
+                    data = head.data
+                    self.head[priority] = None
+                    return data
+
+                current_node = head
+                previous_node = None
+
+                while current_node.link is not None:
+                    previous_node = current_node
+                    current_node = current_node.link
+
+                previous_node.link = None
+                data = current_node.data
+
+                return data
+
+    def __len__(self) -> int:
+        n = 0
+
+        for head in self.head:
+            current_node = head
+            while current_node is not None:
+                n += 1
+                current_node = current_node.link
+
+        return n
+
+    def count_of_priority_levels(self) -> int:
+        return len(self.head)
+
+    def contains(self, data) -> (bool, int, PriorityNode):
+        for priority, head in enumerate(self.head):
+            current_node = head
+            while current_node is not None:
+                if current_node.data == data:
+                    return True, priority, current_node
+
+                current_node = current_node.link
+
+        return False, -1, None
+
+    def __contains__(self, data) -> bool:
+        contained, _, _ = self.contains(data)
+        return contained
+
+    def __str__(self) -> str:
+        output = ""
+
+        for priority, head in enumerate(self.head):
+            current_node = head
+            output += "Priority " + str(priority) + ": "
+
+            while current_node is not None:
+                output += str(current_node.data) + " "
+                current_node = current_node.link
+
+            output += "\n"
+
+        return output.rstrip()
+
+
 def main():
     queue = Queue("fdsa")
 
@@ -93,12 +180,12 @@ def main():
     queue.put("poiu")
 
     print(queue)
-    print(queue.length())
+    print(len(queue))
 
     print(queue.pop())
 
     print(queue)
-    print(queue.length())
+    print(len(queue))
 
     stack = Stack("fdsa")
 
@@ -108,12 +195,43 @@ def main():
     stack.put("poiu")
 
     print(stack)
-    print(stack.length())
+    print(len(stack))
 
     print(stack.pop())
 
     print(stack)
-    print(stack.length())
+    print(len(stack))
+
+    print("PRIORITY QUEUE")
+
+    priority_queue = PriorityQueue(5)
+
+    print(len(priority_queue))
+    print(priority_queue)
+
+    priority_queue.put(4, 0)
+    priority_queue.put(7, 0)
+
+    print(priority_queue.count_of_priority_levels())
+    print(len(priority_queue))
+    print(priority_queue)
+
+    print(priority_queue.contains(4))
+    print(4 in priority_queue)
+
+    print(priority_queue.pop())
+
+    print(priority_queue)
+
+    priority_queue.put(9, 1)
+
+    print(priority_queue.count_of_priority_levels())
+    print(priority_queue)
+
+    print(priority_queue.pop())
+    print(priority_queue.pop())
+    print(priority_queue.pop())
+    print(priority_queue)
 
 
 if __name__ == "__main__":
