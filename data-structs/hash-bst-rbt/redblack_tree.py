@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Implementing Red-Black Tree in Python
 
 # From https://www.programiz.com/dsa/red-black-tree
