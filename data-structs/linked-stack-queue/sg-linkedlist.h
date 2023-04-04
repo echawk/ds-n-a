@@ -24,4 +24,6 @@ int node_get_at_end(node_t **head_ref);
 
 void node_print(node_t *head);
 
+void node_reverse_list(node_t **head_ref);
+
 #endif

@@ -133,3 +133,18 @@ void node_print(node_t *head) {
 
   return;
 }
+
+void node_reverse_list(node_t **head_ref){
+	node_t *last = NULL;
+	node_t *current = *head_ref;
+	node_t *next = (*head_ref)->next;
+
+	while(next != NULL){
+		current->next = last;
+		last = current;
+		current = next;
+		next = next->next;
+	}
+
+	current->next = last;
+}
