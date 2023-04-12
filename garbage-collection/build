@@ -1,2 +1,3 @@
 CFLAGS="-std=c99 -Wall -pedantic -Wextra -g"
 
+"${CC:-cc}" $CFLAGS -o mark_and_sweep ../data-structs/linked-stack-queue/sg-linkedlist.c mark_and_sweep.c
