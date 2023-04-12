@@ -1,5 +1,6 @@
 #include "../data-structs/linked-stack-queue/sg-linkedlist.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 #define START_SIZE 128
