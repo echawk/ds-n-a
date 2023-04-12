@@ -7,13 +7,15 @@ class RBNode{
 private:
 	int data;
 
-  color_t color;
+  color_t color = RED;
 
-	RBNode *left;
-	RBNode *right;
-	RBNode *parent;
+	RBNode *left = nullptr;
+	RBNode *right = nullptr;
+	RBNode *parent = nullptr;
 public:
-  // constructors
+	// inline static RBNode * const SENTINEL = nullptr;
+  // down with the sentinel, we're nullptr gang now
+	// constructors
   RBNode(int data);
   RBNode(int data, color_t color);
   // destructor
@@ -34,21 +36,21 @@ public:
 
 class RBT{
 private:
-	RBNode * const SENTINEL = nullptr;
-  RBNode *root = SENTINEL;
-	RBNode *insert_at_node(const int data, RBNode *node);
-  RBNode *search_at_node(const int data, RBNode *node);
-	void left_rotation();
-	void right_rotation();
+  RBNode *root = nullptr;
+	void left_rotation(RBNode * node);
+	void right_rotation(RBNode * node);
+	void insert_correction(RBNode * node);
+	void remove_correction(RBNode * node);
+	void transplant(RBNode * u, RBNode * v);
 public:
-  RBT();
-
   ~RBT();
 
   RBNode *insert(const int data);
-  RBNode *remove(const int data);
-	RBNode *minimum(RBNode *node);
-  RBNode *maximum(RBNode *node);
+  RBNode *remove(RBNode * z);
+	RBNode *minimum();
+	RBNode *minimum(RBNode * node);
+  RBNode *maximum();
+  RBNode *maximum(RBNode * node);
 };
 
 #endif

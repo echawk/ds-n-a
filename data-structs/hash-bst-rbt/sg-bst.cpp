@@ -13,8 +13,10 @@ Node::Node(int data) {
 // destructor
 
 Node::~Node() {
-  free(this->left);
-  free(this->right);
+	if(this->left)
+  	free(this->left);
+	if(this->right)
+  	free(this->right);
 }
 
 // accessors
