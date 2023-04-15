@@ -2,18 +2,51 @@
 \title{Greedy Algorithms and String Matching}
 \author{Christian Garcia}
 
+%Thanks to stack overflow:
+%https://stackoverflow.com/questions/3175105/inserting-code-in-this-latex-document-with-indentation
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{red},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  identifierstyle=\color{blue},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
 \begin{document}
 
 \maketitle
 
 %\vspace{24pt} % 2 lines
+%\vspace{72pt} % 6 lines
 %\vspace{108pt} % 9 lines
 %\vspace{144pt} % 12 lines
 
 \begin{Huge}
-\section{Questions}
+\section*{Questions}
 \end{Huge}
 
+\begin{itemize}
+\begin{Large}
+\item{\textbf{Greedy Algorithms}}
+\end{Large}
 
 \subsection{Create the infamous greedy algorithm counting change in either Python or C. The change amounts that must be included in the algorithm are the half-dollar (\$0.50), quarter (\$0.25), dime (\$0.10), nickel (\$0.05), and penny (\$0.01).}
 
@@ -35,8 +68,41 @@
 
 \pagebreak{}
 
+\begin{Large}
+\item{\textbf{String Matching}}
+\end{Large}
+
+\subsection{This code is from a fuzzy matching algorithm in Python:}
+
+\begin{lstlisting}
+def tail(l: List[T]) -> List[T]:
+    return l[1:]
+
+def head(l: List[T]) -> T:
+    return l[0]
+
+def lev(a: List[T], b: List[T]) -> int:
+    if len(b) == 0:
+        return len(a)
+    if len(a) == 0:
+        return len(b)
+    if head(a) == head(b):
+        return lev(tail(a), tail(b))
+    return 1 + min(
+        lev(tail(a), b),
+        lev(a, tail(b)),
+        lev(tail(a), tail(b)))
+\end{lstlisting}
+
+\subsection{The above code is levenshtein distance algorithm used in many fuzzy matching algorithms. Pick two different strings and use this algorithm to find the levenshtein distance between the two strings. }
+
+\vspace{72pt}
+
+\subsection{After doing an example comparing two strings, what does the levenshtein distance algorithm tell us about strings?}
+
+\pagebreak{}
 
 
-
+\end{itemize}
 
 \end{document}
