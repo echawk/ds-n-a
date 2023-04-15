@@ -48,12 +48,13 @@ void sort() {
 
 void print() {
   int cost = 0;
+  printf("\n\nVertex       Goes To         Weight");
   for (int i = 0; i < spanList.n; i++) {
-    printf("\n%d\t%d\t%d", spanList.data[i].u, spanList.data[i].v,
+    printf("\n   %c\t\t%c\t\t%d", spanList.data[i].v + 65, spanList.data[i].u + 65,
            spanList.data[i].w);
     cost = cost + spanList.data[i].w;
   }
-  printf("\n\nCost of the spanning tree=%d", cost);
+  printf("\n\nCost of the spanning tree: %d", cost);
 }
 
 void kruskalAlgo() {
@@ -87,10 +88,18 @@ void kruskalAlgo() {
 }
 
 void main() {
-  printf("\nEnter number of vertices:");
+  printf("\nEnter number of vertices: ");
   scanf("%d", &n);
-  printf("\nEnter the adjacency matrix:\n");
+  printf("\nEnter the adjacency matrix (weights from point to point):\n\n");
+  printf("   ");
   for (int i = 0; i < n; i++){
+    printf("%c ", i + 65);
+    if (i + 1 == n){
+      printf("\n");
+    }
+  }
+  for (int i = 0; i < n; i++){
+    printf("%c: ", i + 65);
     for (int j = 0; j < n; j++){
       scanf("%d", &Graph[i][j]);
     }

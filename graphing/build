@@ -4,6 +4,6 @@
 CFLAGS="-std=c99 -Wall -pedantic -Wextra -g"
 
 # Compile all graphing algorithms
-for gr in dijkstra.c minspantree.c; do
+for gr in dijkstra.c kruskal.c; do
     "${CC:-cc}" $CFLAGS -o "${gr%%.c}" "$gr"
 done
