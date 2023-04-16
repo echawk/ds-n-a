@@ -2,8 +2,45 @@
 \title{Graph Algorithms}
 \author{Christian Garcia}
 
+\usepackage{graphicx}
+\usepackage{hyperref}
+
 \begin{document}
 
 \maketitle
+
+%\vspace{36pt} % 3 lines
+
+\begin{Huge}
+\section*{Questions}
+\end{Huge}
+
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{kruskalgraph.png}
+\caption{Graph we are using for Kruskal's algorithm}
+\end{figure}
+
+\subsection{Using the graph above, find the shortest path using Kruskal's algorithm. Please list the total cost to get from point 0 to point 8. Be sure to trace your steps when needed. }
+
+\pagebreak{}
+
+\subsection{Using the code from the link below, insert the graph into the adjacency matrix provided when you run the code. Compare the total cost to the handwritten version of Kruskal's algorithm. Copy and paste or download the code from this link: \href{https://github.com/ehawkvu/ds-n-a/blob/master/graphing/kruskal.c}{kruskal.c}.}
+
+\vspace{36pt}
+
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{dijkstragraph.jpg}
+\caption{Graph we are using for Dijkstra's algorithm}
+\end{figure}
+
+\subsection{Using the graph above, find the shortest path using Dijkstra's algorithm. In addition to showing the shortest path, create the table commonly associated with Dijkstra's algorithm.}
+
+\pagebreak{}
+
+\subsection{Using the code from the link below, modify the adjacency array to create the graph above. Compare the distances to your chart. Copy and paste or download the code from this link: \href{https://github.com/ehawkvu/ds-n-a/blob/master/graphing/dijkstra.c}{dijkstra.c}.}
+
+\vspace{36pt}
+
+\subsection{Modify both Dijkstra's algorithm and Kruskal's algorithm to include a way to track the time of the algorithm. Print this time out in your program. How do the algorithms compare performance wise? Why do you think this is?}
 
 \end{document}
