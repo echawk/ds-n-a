@@ -1,11 +1,17 @@
+#ifdef _WIN32
+  #include "array.c"
+#elif __APPLE__
+  #include "array.h"
+#elif __linux__
+  #include "array.h"
+#endif
+
 #include <assert.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-#include "array.h"
 
 void gnome_sort(Arr_T arr) {
   int pos = 0;

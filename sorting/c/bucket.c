@@ -5,6 +5,7 @@
 #elif __linux__
   #include "array.h"
 #endif
+
 #include <stdint.h>
 #include <stdio.h>
 

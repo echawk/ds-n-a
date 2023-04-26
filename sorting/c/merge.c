@@ -1,4 +1,11 @@
-#include "array.c"
+#ifdef _WIN32
+  #include "array.c"
+#elif __APPLE__
+  #include "array.h"
+#elif __linux__
+  #include "array.h"
+#endif
+
 #include <stdio.h>
 
 void copyArray(Arr_T A, Arr_T copy, int end, int index) {

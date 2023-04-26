@@ -1,7 +1,13 @@
+#ifdef _WIN32
+  #include "array.c"
+#elif __APPLE__
+  #include "array.h"
+#elif __linux__
+  #include "array.h"
+#endif
+
 #include <stdbool.h>
 #include <stdio.h>
-
-#include "array.h"
 
 void shell_sort(Arr_T A) {
   int gap = A.size / 2;

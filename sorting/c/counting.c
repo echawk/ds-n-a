@@ -1,4 +1,11 @@
-#include "array.h"
+#ifdef _WIN32
+  #include "array.c"
+#elif __APPLE__
+  #include "array.h"
+#elif __linux__
+  #include "array.h"
+#endif
+
 #include <stdio.h>
 
 int getMax(Arr_T A) {

@@ -1,7 +1,13 @@
+#ifdef _WIN32
+  #include "array.c"
+#elif __APPLE__
+  #include "array.h"
+#elif __linux__
+  #include "array.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "array.h"
 
 #define DEBUG_STATEMENTS 0
 
