@@ -1,9 +1,10 @@
 import array
+import time
 
 GAPCOEFF = 10.0 / 13.0
 
 
-def combSort(A):
+def comb_sort(A):
     gap = A.size
     swapped = True
     while gap > 1 or swapped:
@@ -19,12 +20,15 @@ def combSort(A):
             i += 1
 
 
-"""MAIN"""
-array = array.Arr_T()
-array.make_Arr(100)
-array.populate_Arr()
-print("Array before sorting: ")
-array.print_Arr()
-combSort(array)
-print("Array after sorting: ")
-array.print_Arr()
+if __name__ == "__main__":
+    array = array.Arr_T()
+    array.make_Arr(100)
+    array.populate_Arr()
+    print("Array before sorting: ")
+    array.print_Arr()
+    start = time.time()
+    comb_sort(array)
+    end = time.time()
+    print("\nArray after sorting: ")
+    array.print_Arr()
+    print("\nThe execution time for the comb sort algorithm is: " + str(float(end-start)))

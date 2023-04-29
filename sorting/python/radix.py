@@ -1,4 +1,5 @@
 import array
+import time
 
 
 def get_place(num: int, place: int) -> int:
@@ -39,6 +40,9 @@ if __name__ == "__main__":
     array.populate_Arr()
     print("Array before sorting: ")
     array.print_Arr()
+    start = time.time()
     radix_sort(array)
-    print("Array after sorting: ")
+    end = time.time()
+    print("\nArray after sorting: ")
     array.print_Arr()
+    print("\nThe execution time for the radix sort algorithm is: " + str(float(end-start)))

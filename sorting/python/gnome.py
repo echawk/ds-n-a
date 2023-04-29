@@ -1,4 +1,5 @@
 import array
+import time
 
 
 def gnome_sort(lst):
@@ -18,6 +19,9 @@ if __name__ == "__main__":
     array.populate_Arr()
     print("Array before sorting: ")
     array.print_Arr()
+    start = time.time()
     gnome_sort(array)
-    print("Array after sorting: ")
+    end = time.time()
+    print("\nArray after sorting: ")
     array.print_Arr()
+    print("\nThe execution time for the gnome sort algorithm is: " + str(float(end-start)))
