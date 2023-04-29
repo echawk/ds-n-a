@@ -8,7 +8,7 @@ def gnome_sort(lst):
         if (pos == 0) or (lst.arr[pos] >= lst.arr[pos - 1]):
             pos += 1
         else:
-            lst.swap(pos, pos-1)
+            lst.swap(pos, pos - 1)
             pos -= 1
 
 

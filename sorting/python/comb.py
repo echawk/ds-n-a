@@ -2,6 +2,7 @@ import array
 
 GAPCOEFF = 10.0 / 13.0
 
+
 def combSort(A):
     gap = A.size
     swapped = True
@@ -17,7 +18,8 @@ def combSort(A):
                 swapped = True
             i += 1
 
-'''MAIN'''
+
+"""MAIN"""
 array = array.Arr_T()
 array.make_Arr(100)
 array.populate_Arr()

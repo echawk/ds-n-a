@@ -1,8 +1,9 @@
 import array
 
+
 def merge_sort(lst: [int]):
     if len(lst) > 1:
-        mid = len(lst)//2
+        mid = len(lst) // 2
         leftA = lst[:mid]
         rightA = lst[mid:]
         merge_sort(leftA)

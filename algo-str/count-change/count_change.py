@@ -2,7 +2,19 @@
 
 from decimal import Decimal
 
-DENOMINATIONS = {"Hundred": 100, "Fifty": 50, "Twenty": 20, "Ten": 10, "Five": 5, "One": 1, "Quarter": 0.25, "Dime": 0.1, "Nickel": 0.05, "Penny": 0.01}
+DENOMINATIONS = {
+    "Hundred": 100,
+    "Fifty": 50,
+    "Twenty": 20,
+    "Ten": 10,
+    "Five": 5,
+    "One": 1,
+    "Quarter": 0.25,
+    "Dime": 0.1,
+    "Nickel": 0.05,
+    "Penny": 0.01,
+}
+
 
 def count_change(currency: float) -> dict:
     change = {}
@@ -15,7 +27,7 @@ def count_change(currency: float) -> dict:
 
     return change
 
+
 print(count_change(5.26))
 print(count_change(103.57))
 print(count_change(53.97))
-

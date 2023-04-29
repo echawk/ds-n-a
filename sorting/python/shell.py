@@ -1,7 +1,8 @@
 import array
 
+
 def shell_sort(A):
-    gap = int(A.size/2)
+    gap = int(A.size / 2)
     while gap > 0:
         x = gap
         while x < A.size:
@@ -13,7 +14,7 @@ def shell_sort(A):
                     A.swap(y, y + gap)
                 y = y - gap
             x = x + 1
-        gap = int(gap/2)
+        gap = int(gap / 2)
 
 
 if __name__ == "__main__":

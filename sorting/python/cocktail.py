@@ -1,5 +1,6 @@
 import array
 
+
 def cocktail_sort(A):
     swapped = True
     s = 0
@@ -14,11 +15,12 @@ def cocktail_sort(A):
             break
         swapped = False
         e -= 1
-        for i in range (e, s - 1, -1):
+        for i in range(e, s - 1, -1):
             if A.arr[i] > A.arr[i + 1]:
                 A.swap(i, i + 1)
                 swapped = True
         s += 1
+
 
 if __name__ == "__main__":
     array = array.Arr_T()

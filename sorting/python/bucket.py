@@ -1,5 +1,6 @@
 import array
 
+
 def get_max(lst):
     max_ind = 0
     for i in range(lst.size):

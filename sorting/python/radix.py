@@ -1,7 +1,9 @@
 import array
 
+
 def get_place(num: int, place: int) -> int:
-    return int(num/place) % 10
+    return int(num / place) % 10
+
 
 def counting_sort(A, place: int):
     output = [0] * A.size
@@ -9,7 +11,7 @@ def counting_sort(A, place: int):
 
     for i in range(0, A.size):
         count[get_place(A.arr[i], place)] += 1
-    
+
     for i in range(1, 10):
         count[i] += count[i - 1]
 
@@ -20,7 +22,8 @@ def counting_sort(A, place: int):
         i -= 1
 
     for i in range(A.size):
-        A.arr[i] = output[i]    
+        A.arr[i] = output[i]
+
 
 def radix_sort(A):
     mx = max(A.arr)
