@@ -1,88 +1,58 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "cg-linkedlist.h"
 
-typedef struct Node {
-  char *data;
-  struct Node *next;
-} node;
-
-void printList(node *n) {
-  while (n != NULL) {
-    printf("%s ", n->data);
-    n = n->next;
-  }
+int main() {
+  clock_t start, end;
+  double duration;
+  LL_T *linked = createList();
+  start = clock();
+  addToEnd(linked, 19);
+  end = clock();
+  duration = ((double)end - start) / CLOCKS_PER_SEC;
+  printf(
+      "\nThe duration to add an element to the end of a linked list is: %10f\n",
+      duration);
+  addToEnd(linked, 20);
+  start = clock();
+  addToFront(linked, 1);
+  end = clock();
+  duration = ((double)end - start) / CLOCKS_PER_SEC;
+  printf("\nThe duration to add an element to the front of a linked list is: "
+         "%10f\n",
+         duration);
+  addToFront(linked, 15);
+  addToEnd(linked, 10);
+  addToEnd(linked, 5);
+  printList(linked);
+  start = clock();
+  Node_T *found = findNode(linked, 19);
+  end = clock();
+  duration = ((double)end - start) / CLOCKS_PER_SEC;
+  printf("\nThe duration to find an element in a linked list is: %10f\n",
+         duration);
+  printf("\nThe node that was found contains %d\n\n", found->data);
+  start = clock();
+  deleteNode(linked, 20);
+  end = clock();
+  duration = ((double)end - start) / CLOCKS_PER_SEC;
+  printf(
+      "\nThe duration to delete a specific element in a linked list is: %10f\n",
+      duration);
+  printList(linked);
+  start = clock();
+  removeFirst(linked);
+  end = clock();
+  duration = ((double)end - start) / CLOCKS_PER_SEC;
+  printf("\nThe duration to delete an element from the front of a linked list "
+         "is: %10f\n",
+         duration);
+  printList(linked);
+  start = clock();
+  removeLast(linked);
+  end = clock();
+  duration = ((double)end - start) / CLOCKS_PER_SEC;
+  printf("\nThe duration to delete an element from the end of a linked list "
+         "is: %10f\n",
+         duration);
+  printList(linked);
+  return 0;
 }
-
-int listSize(node *n) {
-  node *curr;
-  int count = 0;
-  for (curr = n; curr != NULL; curr = curr->next) {
-    count++;
-  }
-  return count;
-}
-
-/*function to create a node with data/link
- * and giving it a space in memory*/
-node *createNode(char *s, node *n) {
-  node *newNode;
-  newNode = (node *)malloc(sizeof(node));
-  newNode->data = s;
-  newNode->next = n;
-  return newNode;
-}
-
-node *findNode(char *s, node *n) {
-  node *curr = n;
-  if (n != NULL) {
-    while (curr->data != s) {
-      if (curr->next != NULL) {
-        curr = curr->next;
-      }
-    }
-  } else {
-    printf("This node does not exist!\n");
-  }
-  return curr;
-}
-
-void deleteNode(char *s, node **n) {
-  node *curr = *n;
-  node *prev = NULL;
-  if (n != NULL) {
-    while (curr->data != s) {
-      if (curr->next != NULL) {
-        prev = curr;
-        curr = curr->next;
-      }
-    }
-    if (curr == *n) {
-      *n = curr->next;
-    } else {
-      prev->next = curr->next;
-    }
-    free(curr);
-  } else {
-    printf("The list is empty!\n");
-  }
-}
-
-/*Main will be removed later. Here for testing purposes
-int main(){
-    node* sixth = createNode("Manjaro", NULL);
-    node* fifth = createNode("Ubuntu", sixth);
-    node* fourth = createNode("Fedora", fifth);
-    node* third = createNode("Arch", fourth);
-    node* second = createNode("Mint", third);
-    node* head = createNode("Debian", second);
-    printf("Original list: ");
-    printList(head);
-    printf("\n");
-    printf("\tList size: %d", listSize(head));
-    deleteNode("Ubuntu", &head);
-    printf("\nNew list: ");
-    printList(head);
-    printf("\n");
-    printf("\tList size: %d", listSize(head));
-    return 0;
-}*/

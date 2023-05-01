@@ -1,58 +1,40 @@
-#include "cg-linkedlist.c"
-#include <stdio.h>
-#include <stdlib.h>
+#include "cg-linkedlist.h"
 
 typedef struct Queue {
-  node *front, *rear;
-} queue;
+  LL_T *list;
+} Queue_T;
 
-queue *createQueue() {
-  queue *q = (queue *)malloc(sizeof(queue));
-  q->front = q->rear = NULL;
-  return q;
+Queue_T *createQueue() {
+  Queue_T *queue = (Queue_T *)malloc(sizeof(Queue_T));
+  queue->list = createList();
+  return queue;
 }
 
-void queueAdd(queue *q, char *s) {
-  node *link = createNode(s, NULL);
-  if (q->front == NULL) {
-    q->front = q->rear = link;
-    return;
-  }
-  q->rear->next = link;
-  q->rear = link;
-}
-
-void queueRemove(queue *q) {
-  if (q->front == NULL) {
-    return;
-  }
-  node *link = q->front;
-  q->front = q->front->next;
-  if (q->front == NULL) {
-    q->rear = NULL;
-  }
-}
+void enqueue(Queue_T *q, int d) { addToEnd(q->list, d); }
+void dequeue(Queue_T *q) { removeFirst(q->list); }
+void printQueue(Queue_T *q) { printList(q->list); }
 
 int main() {
-  queue *q = createQueue();
-  queueAdd(q, "Windows");
-  queueAdd(q, "MacOS");
-  queueAdd(q, "Ubuntu");
-  queueAdd(q, "Debian");
-  queueAdd(q, "Mint");
-  queueAdd(q, "Fedora");
-  queueAdd(q, "Arch");
-  queueAdd(q, "Manjaro");
-  printf("Here is the queue:\n");
-  printList(q->front);
-  printf("\n");
-  printf("\tList size: %d\n", listSize(q->front));
-  for (int i = 0; i < 3; i++) {
-    queueRemove(q);
+  srand((unsigned)time(NULL));
+  clock_t start, end;
+  double duration;
+  Queue_T *queue = createQueue();
+  start = clock();
+  enqueue(queue, 49);
+  end = clock();
+  duration = ((double)end - start) / CLOCKS_PER_SEC;
+  printf("\nThe duration to add an element to a queue is: %10f\n\n", duration);
+  for (int i = 0; i < 20; i++) {
+    enqueue(queue, rand() % 50);
   }
-  printf("Here is the new queue:\n");
-  printList(q->front);
-  printf("\n");
-  printf("\tList size: %d\n", listSize(q->front));
+  printQueue(queue);
+  start = clock();
+  dequeue(queue);
+  end = clock();
+  duration = ((double)end - start) / CLOCKS_PER_SEC;
+  printf("\nThe duration to delete an element from a queue is: %10f\n\n",
+         duration);
+  dequeue(queue);
+  printQueue(queue);
   return 0;
 }
