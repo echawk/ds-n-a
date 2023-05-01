@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 /*From
 https://www.thecrazyprogrammer.com/2014/03/kruskalAlgos-algorithm-for-finding-min*/
@@ -87,6 +88,8 @@ void kruskalAlgo() {
 }
 
 void main() {
+  clock_t start, end;
+  double duration;
   printf("\nEnter number of vertices: ");
   scanf("%d", &n);
   printf("\nEnter the adjacency matrix (weights from point to point):\n\n");
@@ -103,6 +106,10 @@ void main() {
       scanf("%d", &Graph[i][j]);
     }
   }
+  start = clock();
   kruskalAlgo();
+  end = clock();
+  duration = ((double)end-start)/CLOCKS_PER_SEC;
+  printf("\nThe execution time of Kruskal's algorithm is: %10f", duration);
   print();
 }

@@ -4,6 +4,7 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <time.h>
 
 // Number of vertices in the graph
 #define V 9
@@ -80,6 +81,8 @@ void dijkstra(int graph[V][V], int src) {
 
 // driver's code
 int main() {
+  clock_t start, end;
+  double duration;
   /* Let us create the example graph discussed above */
   int graph[V][V] = {
       {0, 4, 0, 0, 0, 0, 0, 8, 0},  {4, 0, 8, 0, 0, 0, 0, 11, 0},
@@ -89,7 +92,11 @@ int main() {
       {0, 0, 2, 0, 0, 0, 6, 7, 0}};
 
   // Function call
+  start = clock();
   dijkstra(graph, 0);
+  end = clock();
+  duration = ((double)end-start)/CLOCKS_PER_SEC;
+  printf("\n\nThe execution time of Dijkstra's algorithm is: %10f", duration);
 
   return 0;
 }
