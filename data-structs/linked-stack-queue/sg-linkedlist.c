@@ -16,7 +16,7 @@ node_t *node_init(int _data, node_t *_next) {
 }
 // if instance is 0, deletes the first, so on so forth for other integers. If
 // -1, deletes the last instance
-node_t *node_search(node_t **head_ref, int data, int instance) {
+node_t *node_search_data(node_t **head_ref, int data, int instance) {
   if (instance < -1) {
     fprintf(stderr,
             "[ERROR] Instance has to be greater than or equal to -1!\n");
@@ -40,6 +40,7 @@ node_t *node_search(node_t **head_ref, int data, int instance) {
 
   return ret; // this will return the last instance or NULL which is valid
 }
+
 // returns
 bool node_delete(node_t **head_ref, node_t *key) {
   node_t *ptr = *head_ref;
@@ -87,14 +88,14 @@ bool node_delete_at_place(node_t **head_ref, int index) {
   return false;
 }
 
-void node_add_to_front(node_t **head_ref, int new_data) {
+node_t *node_add_to_front(node_t **head_ref, int new_data) {
   node_t *new_node = node_init(new_data, *head_ref);
   *head_ref = new_node;
 
-  return;
+  return new_node;
 }
 
-void node_add_to_end(node_t **head_ref, int new_data) {
+node_t *node_add_to_end(node_t **head_ref, int new_data) {
   node_t *new_node = node_init(new_data, NULL);
   node_t *ptr = *head_ref;
 
@@ -104,7 +105,7 @@ void node_add_to_end(node_t **head_ref, int new_data) {
 
   ptr->next = new_node;
 
-  return;
+  return new_node;
 }
 
 int node_get_at_end(node_t **head_ref) {
