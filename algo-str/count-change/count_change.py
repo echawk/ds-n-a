@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from decimal import Decimal
+import time
 
 DENOMINATIONS = {
     "Hundred": 100,
@@ -27,7 +28,9 @@ def count_change(currency: float) -> dict:
 
     return change
 
-
+start = time.time()
 print(count_change(5.26))
+end = time.time()
 print(count_change(103.57))
 print(count_change(53.97))
+print("\nThe execution time for the greedy algorithm counting change is: " + str(float(end-start)))
