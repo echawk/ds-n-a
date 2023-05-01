@@ -1,5 +1,13 @@
+#ifdef _WIN32
+#include "array.c"
+#elif __APPLE__
 #include "array.h"
+#elif __linux__
+#include "array.h"
+#endif
+
 #include <stdio.h>
+#include <time.h>
 
 void heapify(Arr_T A, int N, int i) {
   int largest = i;
@@ -32,6 +40,7 @@ void sort(Arr_T A) { heapSort(A, A.size); }
 #ifndef ASLIB
 int main(int argc, char *argv[]) {
   int arr_size;
+  clock_t start, end;
   if (argc > 1) {
     if (sscanf(argv[1], "%i", &arr_size) != 1) {
       fprintf(stderr, "[ERR] - Not an integer!");
@@ -44,9 +53,13 @@ int main(int argc, char *argv[]) {
   populate_Arr(M);
   printf("Array before sorting: \n");
   print_Arr(M);
+  start = clock();
   heapSort(M, M.size);
-  printf("Array after sorting: \n");
+  end = clock();
+  printf("\nArray after sorting: \n");
   print_Arr(M);
+  double duration = ((double)end-start)/CLOCKS_PER_SEC;
+  printf("\nThe execution time of the heap sort algorithm is: %10f", duration);
   return 0;
 }
 #endif

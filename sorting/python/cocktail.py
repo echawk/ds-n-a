@@ -1,4 +1,6 @@
 import array
+import time
+
 
 def cocktail_sort(A):
     swapped = True
@@ -14,11 +16,12 @@ def cocktail_sort(A):
             break
         swapped = False
         e -= 1
-        for i in range (e, s - 1, -1):
+        for i in range(e, s - 1, -1):
             if A.arr[i] > A.arr[i + 1]:
                 A.swap(i, i + 1)
                 swapped = True
         s += 1
+
 
 if __name__ == "__main__":
     array = array.Arr_T()
@@ -26,6 +29,9 @@ if __name__ == "__main__":
     array.populate_Arr()
     print("Array before sorting: ")
     array.print_Arr()
+    start = time.time()
     cocktail_sort(array)
-    print("Array after sorting: ")
+    end = time.time()
+    print("\nArray after sorting: ")
     array.print_Arr()
+    print("\nThe execution time for the cocktail sort algorithm is: " + str(float(end-start)))

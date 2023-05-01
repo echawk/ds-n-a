@@ -13,136 +13,138 @@ typedef struct Data {
 } Node;
 
 void rotateLeft(Node **rootPointer, Node *x) {
-    if (!x || !x->rightChild) {
-        return;
-    }
+  if (!x || !x->rightChild) {
+    return;
+  }
 
-    //y stored pointer of right child of x
-    Node *y = x->rightChild;
- 
-    //store y's left subtree's pointer as x's right child
-    x->rightChild = y->leftChild;
- 
-    //update parent pointer of x's right
-    if (x->rightChild != NULL) {
-        x->rightChild->parentNode = x;
-    }
- 
-    //update y's parent pointer
-    y->parentNode = x->parentNode;
- 
-    // if x's parent is null make y as root of tree
-    if (x->parentNode == NULL) {
-        (*rootPointer) = y;
-    } else if (x == x->parentNode->leftChild) { // store y at the place of x
-        x->parentNode->leftChild = y;
-    } else {
-        x->parentNode->rightChild = y;
-    }
- 
-    // make x as left child of y
-    y->leftChild = x;
- 
-    //update parent pointer of x
-    x->parentNode = y;
+  // y stored pointer of right child of x
+  Node *y = x->rightChild;
+
+  // store y's left subtree's pointer as x's right child
+  x->rightChild = y->leftChild;
+
+  // update parent pointer of x's right
+  if (x->rightChild != NULL) {
+    x->rightChild->parentNode = x;
+  }
+
+  // update y's parent pointer
+  y->parentNode = x->parentNode;
+
+  // if x's parent is null make y as root of tree
+  if (x->parentNode == NULL) {
+    (*rootPointer) = y;
+  } else if (x == x->parentNode->leftChild) { // store y at the place of x
+    x->parentNode->leftChild = y;
+  } else {
+    x->parentNode->rightChild = y;
+  }
+
+  // make x as left child of y
+  y->leftChild = x;
+
+  // update parent pointer of x
+  x->parentNode = y;
 }
- 
-void rotateRight(Node **rootPointer, Node *y) {
-    if (!y || !y->leftChild) {
-        return;
-    }
 
-    Node *x = y->leftChild;
-    y->leftChild = x->rightChild;
-    if (x->rightChild != NULL)
-        x->rightChild->parentNode = y;
-    x->parentNode =y->parentNode;
-    if (x->parentNode == NULL) {
-        (*rootPointer) = x;
-    } else if (y == y->parentNode->leftChild) {
-        y->parentNode->leftChild = x;
-    } else {
-        y->parentNode->rightChild = x;
-    }
-    x->rightChild = y;
-    y->parentNode = x;
+void rotateRight(Node **rootPointer, Node *y) {
+  if (!y || !y->leftChild) {
+    return;
+  }
+
+  Node *x = y->leftChild;
+  y->leftChild = x->rightChild;
+  if (x->rightChild != NULL)
+    x->rightChild->parentNode = y;
+  x->parentNode = y->parentNode;
+  if (x->parentNode == NULL) {
+    (*rootPointer) = x;
+  } else if (y == y->parentNode->leftChild) {
+    y->parentNode->leftChild = x;
+  } else {
+    y->parentNode->rightChild = x;
+  }
+  x->rightChild = y;
+  y->parentNode = x;
 }
 
 void adjustInsertion(Node **rootPointer, Node *tempNode) {
-    // Iterates until tempNode is not the root and tempNode's parent color is red
-    while (tempNode != *rootPointer && tempNode->parentNode->color == RED) {
-        Node *uncleNode;
- 
-        // Find uncle and store uncle in y
-        if (tempNode->parentNode == tempNode->parentNode->parentNode->leftChild) {
-            uncleNode = tempNode->parentNode->parentNode->rightChild;
-        } else {
-            uncleNode = tempNode->parentNode->parentNode->leftChild;
-        }
- 
-        // If uncle is RED, do following
-        // (i)  Change color of parent and uncle as BLACK
-        // (ii) Change color of grandparent as RED
-        // (iii) Move tempNode to grandparent
-        if (!uncleNode) {
-            tempNode = tempNode->parentNode->parentNode->leftChild;
-        } else if (uncleNode->color == RED) {
-            uncleNode->color = BLACK;
-            tempNode->parentNode->color = BLACK;
-            tempNode->parentNode->parentNode->color = RED;
-            tempNode = tempNode->parentNode->parentNode;
-        } else {  
-            // Uncle is BLACK, there are four cases (LL, LR, RL and RR)
-            // Left-Left (LL) case, do following
-            // (i)  Swap color of parent and grandparent
-            // (ii) Right Rotate Grandparent
-            if (tempNode->parentNode == tempNode->parentNode->parentNode->leftChild &&
-                tempNode == tempNode->parentNode->leftChild) {
-                int tempColor = tempNode->parentNode->color;
-                tempNode->parentNode->color = tempNode->parentNode->parentNode->color;
-                tempNode->parentNode->parentNode->color = tempColor;
-                rotateRight(rootPointer,tempNode->parentNode->parentNode);
-            }
- 
-            // Left-Right (LR) case, do following
-            // (i)  Swap color of current node  and grandparent
-            // (ii) Left Rotate Parent
-            // (iii) Right Rotate Grand Parent
-            if (tempNode->parentNode == tempNode->parentNode->parentNode->leftChild &&
-                tempNode == tempNode->parentNode->rightChild) {
-                int tempColor = tempNode->color ;
-                tempNode->color = tempNode->parentNode->parentNode->color;
-                tempNode->parentNode->parentNode->color = tempColor;
-                rotateLeft(rootPointer,tempNode->parentNode);
-                rotateRight(rootPointer,tempNode->parentNode->parentNode);
-            }
- 
-            // Right-Right (RR) case, do following
-            // (i)  Swap color of parent and grandparent
-            // (ii) Left Rotate Grandparent
-            if (tempNode->parentNode == tempNode->parentNode->parentNode->rightChild &&
-                tempNode == tempNode->parentNode->rightChild) {
-                int tempColor = tempNode->parentNode->color ;
-                tempNode->parentNode->color = tempNode->parentNode->parentNode->color;
-                tempNode->parentNode->parentNode->color = tempColor;
-                rotateLeft(rootPointer, tempNode->parentNode->parentNode);
-            }
- 
-            // Right-Left (RL) case, do following
-            // (i)  Swap color of current node  and grandparent
-            // (ii) Right Rotate Parent
-            // (iii) Left Rotate Grand Parent
-            if (tempNode->parentNode == tempNode->parentNode->parentNode->rightChild &&
-                tempNode == tempNode->parentNode->leftChild) {
-                int tempColor = tempNode->color ;
-                tempNode->color = tempNode->parentNode->parentNode->color;
-                tempNode->parentNode->parentNode->color = tempColor;
-                rotateRight(rootPointer, tempNode->parentNode);
-                rotateLeft(rootPointer, tempNode->parentNode->parentNode);
-            }
-        }
+  // Iterates until tempNode is not the root and tempNode's parent color is red
+  while (tempNode != *rootPointer && tempNode->parentNode->color == RED) {
+    Node *uncleNode;
+
+    // Find uncle and store uncle in y
+    if (tempNode->parentNode == tempNode->parentNode->parentNode->leftChild) {
+      uncleNode = tempNode->parentNode->parentNode->rightChild;
+    } else {
+      uncleNode = tempNode->parentNode->parentNode->leftChild;
     }
-    (*rootPointer)->color = BLACK; //keep root always black
+
+    // If uncle is RED, do following
+    // (i)  Change color of parent and uncle as BLACK
+    // (ii) Change color of grandparent as RED
+    // (iii) Move tempNode to grandparent
+    if (!uncleNode) {
+      tempNode = tempNode->parentNode->parentNode->leftChild;
+    } else if (uncleNode->color == RED) {
+      uncleNode->color = BLACK;
+      tempNode->parentNode->color = BLACK;
+      tempNode->parentNode->parentNode->color = RED;
+      tempNode = tempNode->parentNode->parentNode;
+    } else {
+      // Uncle is BLACK, there are four cases (LL, LR, RL and RR)
+      // Left-Left (LL) case, do following
+      // (i)  Swap color of parent and grandparent
+      // (ii) Right Rotate Grandparent
+      if (tempNode->parentNode == tempNode->parentNode->parentNode->leftChild &&
+          tempNode == tempNode->parentNode->leftChild) {
+        int tempColor = tempNode->parentNode->color;
+        tempNode->parentNode->color = tempNode->parentNode->parentNode->color;
+        tempNode->parentNode->parentNode->color = tempColor;
+        rotateRight(rootPointer, tempNode->parentNode->parentNode);
+      }
+
+      // Left-Right (LR) case, do following
+      // (i)  Swap color of current node  and grandparent
+      // (ii) Left Rotate Parent
+      // (iii) Right Rotate Grand Parent
+      if (tempNode->parentNode == tempNode->parentNode->parentNode->leftChild &&
+          tempNode == tempNode->parentNode->rightChild) {
+        int tempColor = tempNode->color;
+        tempNode->color = tempNode->parentNode->parentNode->color;
+        tempNode->parentNode->parentNode->color = tempColor;
+        rotateLeft(rootPointer, tempNode->parentNode);
+        rotateRight(rootPointer, tempNode->parentNode->parentNode);
+      }
+
+      // Right-Right (RR) case, do following
+      // (i)  Swap color of parent and grandparent
+      // (ii) Left Rotate Grandparent
+      if (tempNode->parentNode ==
+              tempNode->parentNode->parentNode->rightChild &&
+          tempNode == tempNode->parentNode->rightChild) {
+        int tempColor = tempNode->parentNode->color;
+        tempNode->parentNode->color = tempNode->parentNode->parentNode->color;
+        tempNode->parentNode->parentNode->color = tempColor;
+        rotateLeft(rootPointer, tempNode->parentNode->parentNode);
+      }
+
+      // Right-Left (RL) case, do following
+      // (i)  Swap color of current node  and grandparent
+      // (ii) Right Rotate Parent
+      // (iii) Left Rotate Grand Parent
+      if (tempNode->parentNode ==
+              tempNode->parentNode->parentNode->rightChild &&
+          tempNode == tempNode->parentNode->leftChild) {
+        int tempColor = tempNode->color;
+        tempNode->color = tempNode->parentNode->parentNode->color;
+        tempNode->parentNode->parentNode->color = tempColor;
+        rotateRight(rootPointer, tempNode->parentNode);
+        rotateLeft(rootPointer, tempNode->parentNode->parentNode);
+      }
+    }
+  }
+  (*rootPointer)->color = BLACK; // keep root always black
 }
 
 Node *insert(Node **rootPointer, int newData) {
@@ -174,7 +176,7 @@ Node *insert(Node **rootPointer, int newData) {
       parent->leftChild = tempNode;
     }
     tempNode->color = RED;
- 
+
     // adjust insert to accomodate rb-tree color properties
     adjustInsertion(rootPointer, tempNode);
   }
@@ -197,7 +199,8 @@ Node *search(Node *current, int find) {
   return current;
 }
 
-void rebalance(Node *root, Node *current) { // not necessary, BST doesn't need to balance
+void rebalance(Node *root,
+               Node *current) { // not necessary, BST doesn't need to balance
   if (current != NULL) {
     insert(&root, current->data);
     rebalance(root, current->leftChild);

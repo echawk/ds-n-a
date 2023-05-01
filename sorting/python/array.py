@@ -33,7 +33,7 @@ class Arr_T:
         return li
 
     def print_Arr(self):
-        print("[" + ", ".join(str(x) for x in self.arr) + "]", sep=", ")
+        print("[" + ",".join(str(x) for x in self.arr) + "]", sep=",")
 
     def swap(self, ind1: int, ind2: int):
         if self.arr[ind1] != self.arr[ind2]:

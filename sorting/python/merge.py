@@ -1,8 +1,10 @@
 import array
+import time
+
 
 def merge_sort(lst: [int]):
     if len(lst) > 1:
-        mid = len(lst)//2
+        mid = len(lst) // 2
         leftA = lst[:mid]
         rightA = lst[mid:]
         merge_sort(leftA)
@@ -32,6 +34,9 @@ if __name__ == "__main__":
     array.populate_Arr()
     print("Array before sorting: ")
     array.print_Arr()
+    start = time.time()
     merge_sort(array.arr)
-    print("Array after sorting: ")
+    end = time.time()
+    print("\nArray after sorting: ")
     array.print_Arr()
+    print("\nThe execution time for the merge sort algorithm is: " + str(float(end-start)))
