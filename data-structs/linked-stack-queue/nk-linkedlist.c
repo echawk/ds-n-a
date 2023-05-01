@@ -22,9 +22,3 @@ void printList(Node *current) {
     i += 1;
   }
 }
-
-/*int main() {
-  Node* head = createNode(1, NULL);
-  head->next = createNode(2, NULL);
-  printList(head);
-}*/

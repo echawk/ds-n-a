@@ -10,15 +10,15 @@ void add(Node *current, int newData) { // Adds to back
   current->next = createNode(newData, NULL);
 }
 
-int rem(Node *head) { // Removes from front
-  if (head == NULL) {
+int rem(Node **head) { // Removes from front
+  if (*head == NULL) {
     return -1;
   } else {
-    int x = head->data;
-    Node *temp = head;
-    head = head->next;
+    int x = (*head)->data;
+    Node *temp = *head;
+    *head = (*head)->next;
     free(temp);
-    return (x);
+    return x;
   }
 }
 
@@ -29,7 +29,7 @@ int main() {
   add(head, 4);
   printList(head);
 
-  printf("Removed first element, number stored was %d\n", rem(head));
+  printf("Removed first element, number stored was %d\n", rem(&head));
   printList(head);
 
   printf("Removed first element Mach II\n");
