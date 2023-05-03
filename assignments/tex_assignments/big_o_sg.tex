@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage{minted}
+\usepackage[margin=1in]{geometry}
+
+\setminted[]{
+	xleftmargin=.75cm,
+	xrightmargin=.75cm,
+	frame=single,
+	framesep=.25cm,
+	linenos,
+	tabsize=4,
+	breaklines
+}
+
+\title{Homework \#1}
+\author{CS-495: Data Structures and Algorithms}
+
+\begin{document}
+\date{}
+\maketitle
+
+Consider the following code snippets. Give the Big O, Big $\Theta$, and Big $\Omega$ \textbf{time complexity} for each snippet. Briefly explain what the code snippet is doing.
+\begin{enumerate}
+	% Big Omega: $n$
+	% Big Theta: $n$
+	% Big O    : 1
+	\item %Sums numbers from 0 to n
+	\begin{minted}{C}
+		int func1(int n){
+			int s = 0;
+
+			for(int i = 0; i < n; i++)
+				s += i;
+
+			return s;
+		}
+	\end{minted}
+	% Big Omega: $n^2$
+	% Big Theta: $n$
+	% Big O    : 1
+	\item %Matrix addition
+	\begin{minted}{C}
+		void func2(int row, int col, int a[row][col], int b[row][col]){
+			for(int i = 0; i < row; i++){
+				for(int j = 0; j < col; j++){
+					a[i][j] += b[i][j];
+				}
+			}
+		}
+	\end{minted}
+	% Big Omega: $n^2$
+	% Big Theta: $n^2$
+	% Big O    : $n$
+	\item %I don't remember what this is?
+	\begin{minted}{C}
+		void func3(int size, int a[size]){
+			int key, j;	
+			for(int i = 1; i < size; i++){
+				key = a[i];
+				j = i - 1;
+
+				while(j >= 0 && a[j] > key){
+					a[j + 1] = a[j];
+					j = j - 1;
+				}
+
+				a[j + 1] = key;
+			}
+		}
+	\end{minted}
+	\item \textbf{Note:} Assume that func4 defines and is passed all arguments to make this code valid.
+	\begin{minted}{C}
+		void func4(...){
+			func1(n);
+			func2(row, col, a[row][col], b[row][col]);
+			func3(size, a[size]);
+		}
+	\end{minted}
+\end{enumerate}
+Write an algorithm that satisfies the given Big O, Big $\Theta$, or Big $\Omega$ for the given complexity and explain how/why it meets the requirement.
+\begin{enumerate}
+	\item O(1) space complexity
+	\item O($n^2$) time complexity
+	\item $\Theta(n\log n)$ space complexity
+	\item $\Omega(n)$ time complexity
+\end{enumerate}
+
+\end{document}
