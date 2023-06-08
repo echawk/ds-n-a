@@ -130,7 +130,7 @@ Regex_T make_Regex(char *str) {
     int j; // general iterator for the switch statements.
 
     if (isalnum(curr_c)) {
-      StateVecMatr[curr_state].tVec[curr_c] = curr_state + 1;
+      StateVecMatr[curr_state].tVec[(int)curr_c] = curr_state + 1;
     } else {
       switch (curr_c) {
         /*
